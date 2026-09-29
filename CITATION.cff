@@ -1,0 +1,81 @@
+cff-version: 1.2.0
+message: >-
+  If you use this software or its results, please cite the talk it was
+  written for, using the metadata in preferred-citation.
+type: software
+title: "Neighborhood DNA: functional profiles of urban neighbourhoods from Overture Maps Places"
+abstract: >-
+  A 50-line Python script that turns a bounding box into the functional
+  profile of every H3 cell inside it. DuckDB reads the Overture Maps Places
+  GeoParquet on S3 and pushes the bounding-box filter down to storage, so
+  nothing is downloaded. Each cell gets its shares of taxonomy categories
+  (the DNA), Hill numbers of order 1 and 2, the top category share, a TF-IDF
+  signature and an HDBSCAN label, written as GeoJSON. The repository adds the
+  robustness checks presented at FOSS4G Hiroshima 2026: control for cell size
+  and control for the provider blend recorded in the sources column.
+authors:
+  - family-names: Ercegovac
+    given-names: Marija
+    affiliation: Independent researcher
+    orcid: "https://orcid.org/0009-0008-3040-5515"
+version: 1.0.0
+date-released: "2026-09-29"
+license: MIT
+repository-code: "https://github.com/m-erts/neighborhood-dna"
+url: "https://m-erts.github.io/neighborhood-dna/"
+keywords:
+  - Overture Maps
+  - points of interest
+  - DuckDB
+  - GeoParquet
+  - H3
+  - Hill numbers
+  - functional diversity
+  - urban analytics
+  - mixed use
+  - FOSS4G
+# Zenodo: archive a GitHub release, then put the DOI it mints here and delete
+# the comment marks. The pattern below is a placeholder, not a registered DOI.
+# doi: 10.5281/zenodo.XXXXXXX
+references:
+  - type: data
+    title: "Overture Maps Places, release 2026-09-23.1"
+    authors:
+      - name: "Overture Maps Foundation"
+    url: "https://docs.overturemaps.org/guides/places/"
+    date-released: "2026-09-23"
+  - type: article
+    title: "Coverage-based rarefaction and extrapolation: standardizing samples by completeness rather than size"
+    authors:
+      - family-names: Chao
+        given-names: Anne
+      - family-names: Jost
+        given-names: Lou
+    journal: Ecology
+    volume: 93
+    issue: 12
+    start: 2533
+    end: 2547
+    year: 2012
+    doi: 10.1890/11-1952.1
+preferred-citation:
+  type: slides
+  title: "50 Lines of Python: Neighborhood DNA from Overture Maps Places"
+  authors:
+    - family-names: Ercegovac
+      given-names: Marija
+      affiliation: Independent researcher
+      orcid: "https://orcid.org/0009-0008-3040-5515"
+  conference:
+    name: "FOSS4G Hiroshima 2026"
+    city: Hiroshima
+    country: JP
+    date-start: "2026-08-30"
+    date-end: "2026-09-05"
+    website: "https://2026.foss4g.org/"
+  date-released: "2026-09-02"
+  year: 2026
+  month: 9
+  url: "https://talks.osgeo.org/foss4g-2026/talk/ERGRGW/"
+  repository-code: "https://github.com/m-erts/neighborhood-dna"
+  notes: "Lightning talk, 2 September 2026, room Ran1. Slides: https://m-erts.github.io/neighborhood-dna/"
