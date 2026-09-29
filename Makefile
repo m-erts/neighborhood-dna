@@ -3,7 +3,7 @@ RELEASE  ?= 2026-09-23.1
 PREVIOUS ?= 2026-08-19.0
 PYTHON   ?= python
 
-.PHONY: all cities results cost slides test live lint cite serve
+.PHONY: all cities results cost slides card test live lint cite serve
 
 all: cities results cost slides lint test
 
@@ -21,6 +21,9 @@ cost:     ## megabytes and seconds per city -> docs/data/cost.json
 
 slides:   ## docs/assets/*.svg and docs/index.html from docs/data
 	$(PYTHON) docs/build.py
+
+card:     ## docs/assets/card.png for link previews (needs Chrome, not part of `all`)
+	$(PYTHON) docs/card.py
 
 test:     ## offline, a few seconds
 	$(PYTHON) -m pytest -q
