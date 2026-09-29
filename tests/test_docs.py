@@ -63,6 +63,16 @@ def test_readme_quotes_the_districts():
         assert quoted in README, f"{row['district']}: README should contain {quoted}"
 
 
+def test_link_previews_get_a_raster_card():
+    """LinkedIn and X ignore SVG in og:image."""
+    png = (DOCS / "assets" / "card.png").read_bytes()
+    assert png[:8] == b"\x89PNG\r\n\x1a\n"
+    assert (int.from_bytes(png[16:20]), int.from_bytes(png[20:24])) == (1200, 630)
+    for page in PAGES:
+        image = re.search(r'property="og:image" content="([^"]+)"', (DOCS / page).read_text())
+        assert image and image.group(1).endswith("/assets/card.png"), page
+
+
 def test_versions_agree():
     project = tomllib.loads((ROOT / "pyproject.toml").read_text())["project"]
     citation = (ROOT / "CITATION.cff").read_text()

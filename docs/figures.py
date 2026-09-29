@@ -149,6 +149,38 @@ def banner(cities):
                 f"produces: {len(cells)} H3 cells shaded by top category share.")
 
 
+def card(cities):
+    """The 1200 x 630 card that link previews show. Rendered to PNG by `make card`."""
+    city = cities["hiroshima"]
+    meta, cells = city["metadata"], [f["properties"] for f in city["features"]]
+    width, height = 1200, 630
+    box = " ".join(f"{v:g}" for v in meta["bbox"])
+    lines = [(f"$ python dna.py {box} hiroshima", TEXT),
+             (f"hiroshima.geojson: {len(cells)} cells, {sum(c['flagged'] for c in cells)} flagged, "
+              f"Overture {meta['source']}", TEXT_2),
+             (f"HDBSCAN {max(c['cluster'] for c in cells) + 1} clusters, "
+              f"{sum(c['cluster'] < 0 for c in cells) / len(cells):.0%} noise", TEXT_2),
+             (str(meta["providers_pct"]), TEXT_2)]
+    body = [text(64, 150, "50 Lines of Python", 68, TEXT, SANS, 800, letter_spacing="-1.5"),
+            text(64, 204, "Neighborhood DNA from Overture Maps Places", 29, ACCENT),
+            f'<rect x="64.5" y="254.5" width="650" height="180" rx="6" fill="{SURFACE}" '
+            f'stroke="#FFFFFF" stroke-opacity="0.08"/>']
+    for i, (line, colour) in enumerate(lines):
+        shown = line if len(line) <= 66 else line[:63] + "..."
+        body.append(text(88, 298 + i * 32, shown, 15, colour, MONO, xml_space="preserve"))
+    body += [text(64, 528, "Marija Ercegovac", 26, TEXT, SANS, 600),
+             text(64, 564, "FOSS4G Hiroshima 2026, lightning talk", 18, TEXT_2, MONO),
+             text(64, 592, "github.com/m-erts/neighborhood-dna", 18, TEXT_2, MONO)]
+    polygons, _ = hexagons(city["features"], 768, 0, 376)
+    lowest = max(float(c.split(",")[1]) for points, _ in polygons for c in points.split())
+    body.append(f'<g transform="translate(0 {(height - lowest) / 2:.1f})">'
+                f'{"".join(cell_marks(polygons))}</g>')
+    return dict(width=width, height=height, body=body, head=0,
+                title="50 Lines of Python: Neighborhood DNA from Overture Maps Places",
+                description=f"Title of the talk, the terminal output of dna.py for Hiroshima and "
+                f"the map it produces: {len(cells)} H3 cells shaded by top category share.")
+
+
 def maps(cities, summary):
     width, panel, top = 1200, 250, 138
     gap = (width - 96 - 4 * panel) / 3
@@ -379,7 +411,7 @@ def draw():
     cities = {key: json.loads((DATA / f"{key}.geojson").read_text()) for key in CITY_NAMES}
     summary = {row["city"]: row for row in results["summary"]}
     ASSETS.mkdir(exist_ok=True)
-    figures = {"banner": banner(cities), "maps": maps(cities, summary),
+    figures = {"banner": banner(cities), "card": card(cities), "maps": maps(cities, summary),
                "districts": districts(results), "check-cell-size": cell_size(results),
                "check-sources": sources(results)}
     for name, figure in figures.items():
