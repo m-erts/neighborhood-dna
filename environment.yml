@@ -1,0 +1,31 @@
+# conda env create -f environment.yml && conda activate neighborhood-dna
+#
+# Conda supplies Python; every package comes from the same PyPI wheels as
+# requirements.txt, so the conda and pip environments are identical.
+# C libraries arrive inside the wheels and are pinned through them:
+#   pyogrio 0.13.0  -> GDAL 3.12.4
+#   shapely 2.1.2   -> GEOS 3.13.1
+#   pyproj 3.8.0    -> PROJ (bundled)
+# DuckDB fetches its own extensions on first run: httpfs, spatial, h3 (community).
+name: neighborhood-dna
+channels:
+  - conda-forge
+dependencies:
+  - python=3.13
+  - pip
+  - pip:
+      - -r requirements.txt
+      # view.py
+      - geopandas==1.2.0
+      - shapely==2.1.2
+      - pyogrio==0.13.0
+      - pyproj==3.8.0
+      - pyarrow==25.0.1
+      - lonboard==0.16.0
+      # tests and lint
+      - pytest==9.1.1
+      - ruff==0.16.9
+      - cffconvert==2.0.0
+      # docs/build.py
+      - pygments==2.21.0
+      - segno==1.6.6
