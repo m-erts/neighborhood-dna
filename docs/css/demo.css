@@ -1,0 +1,85 @@
+/* The map explorer. Tokens come from tokens.css. */
+body { min-height: 100vh; display: flex; flex-direction: column; }
+
+.top, .controls, .layout, .foot { padding: 0 24px; }
+
+.top { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; height: 56px; padding-top: 18px; border-bottom: 1px solid var(--border); }
+.top h1 { margin: 0; font-size: 18px; font-weight: 700; letter-spacing: -0.01em; }
+.top nav { display: flex; gap: 20px; font: 13px/1 var(--mono); }
+.top nav a { color: var(--text-2); text-decoration: none; }
+.top nav a:hover { color: var(--accent); }
+
+.controls { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; padding-top: 14px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
+.group { display: flex; }
+.group button { border-radius: 0; margin-left: -1px; }
+.group button:first-child { border-radius: 4px 0 0 4px; margin-left: 0; }
+.group button:last-child { border-radius: 0 4px 4px 0; }
+.group button[aria-pressed="true"] { position: relative; z-index: 1; }
+.file { margin-left: auto; font: 500 13px/1 var(--mono); color: var(--text-2); cursor: pointer; }
+.file input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+.file span { display: inline-block; padding: 8px 12px; border: 1px dashed rgba(255, 255, 255, 0.2); border-radius: 4px; }
+.file:hover span, .file input:focus-visible + span { border-color: var(--accent); color: var(--accent); }
+
+.layout { flex: 1; display: grid; grid-template-columns: minmax(0, 1fr) 400px; gap: 0; padding-right: 0; }
+.map { position: relative; padding: 20px 24px 20px 0; min-width: 0; display: flex; flex-direction: column; }
+.map svg { flex: 1; width: 100%; min-height: 420px; max-height: calc(100vh - 210px); display: block; }
+.map.is-over { outline: 2px dashed var(--accent); outline-offset: -8px; }
+.map polygon { stroke: var(--canvas); stroke-width: 0.8; vector-effect: non-scaling-stroke; cursor: pointer; }
+.map polygon:hover { stroke: var(--text); stroke-width: 1.5; }
+.map polygon.picked { fill: none; stroke: #fff; stroke-width: 3.5; stroke-linejoin: round; pointer-events: none; }
+.map polygon.picked.casing { stroke: var(--canvas); stroke-width: 8; }
+.map .ring { fill: none; stroke: #fff; stroke-width: 1.6; pointer-events: none; }
+.notice { margin: 0 0 12px; padding: 12px 14px; font-size: 14px; line-height: 1.5; color: var(--text); background: var(--surface); border: 1px solid var(--border); border-left: 2px solid var(--retail); border-radius: 4px; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; padding-top: 14px; font: 12px/1.4 var(--mono); color: var(--text-2); }
+.legend i { display: inline-block; width: 11px; height: 11px; margin-right: 6px; border-radius: 2px; vertical-align: -1px; }
+.legend i.ring { background: none; box-shadow: inset 0 0 0 1.6px #fff; }
+
+.panel { border-left: 1px solid var(--border); overflow-y: auto; max-height: calc(100vh - 118px); }
+.panel section { padding: 20px 24px; border-bottom: 1px solid var(--border); }
+.panel h2 { margin: 0 0 4px; font-size: 16px; font-weight: 600; }
+.panel h3 { margin: 18px 0 8px; font: 500 12px/1 var(--mono); color: var(--text-3); }
+.hint { margin: 0; font-size: 13.5px; line-height: 1.5; color: var(--text-2); }
+.id { font: 12px/1.4 var(--mono); color: var(--text-2); overflow-wrap: anywhere; }
+
+.facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px 12px; margin: 14px 0 0; }
+.facts div { min-width: 0; }
+.facts dt { font: 12px/1.3 var(--mono); color: var(--text-3); }
+.facts dd { margin: 4px 0 0; font: 600 20px/1.1 var(--mono); color: var(--text); }
+.facts dd.flag { color: var(--accent); }
+.facts dd.long { font-size: 14px; line-height: 1.6; font-weight: 500; }
+
+.dna { display: flex; gap: 2px; height: 30px; margin: 16px 0 12px; }
+.dna span { min-width: 2px; }
+.shares { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+.shares th { text-align: left; font: 500 12px/1 var(--mono); color: var(--text-3); padding: 0 0 8px; }
+.shares th:not(:first-child), .shares td:not(:first-child) { text-align: right; font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.shares td { padding: 5px 0; border-top: 1px solid var(--border); }
+.shares i { display: inline-block; width: 9px; height: 9px; margin-right: 8px; border-radius: 2px; }
+
+.bars { display: grid; gap: 8px; }
+.bars div { display: grid; grid-template-columns: 110px 1fr 46px; align-items: center; gap: 10px; font: 12.5px/1 var(--mono); color: var(--text-2); }
+.bars b { display: block; height: 8px; background: #1F2937; border-radius: 0 4px 4px 0; overflow: hidden; }
+.bars b i { display: block; height: 100%; background: var(--text-2); border-radius: 0 4px 4px 0; }
+.bars span:last-child { text-align: right; color: var(--text); }
+
+.shortlist { list-style: none; margin: 12px 0 0; padding: 0; }
+.shortlist button { width: 100%; display: grid; grid-template-columns: 1fr auto auto; gap: 14px; align-items: baseline; text-align: left; padding: 9px 10px; margin-top: -1px; border-radius: 0; background: none; font: 13px/1.3 var(--sans); }
+.shortlist button span:nth-child(2), .shortlist button span:nth-child(3) { font-family: var(--mono); color: var(--text-2); }
+.shortlist button span:nth-child(2) { color: var(--text); }
+.shortlist .empty { font-size: 13.5px; color: var(--text-2); }
+
+.foot { padding-top: 14px; padding-bottom: 18px; border-top: 1px solid var(--border); }
+.foot p { margin: 0; max-width: 90ch; font-size: 13px; line-height: 1.55; color: var(--text-3); }
+.foot a { color: var(--text-2); }
+
+@media (max-width: 900px) {
+  .top, .controls, .layout, .foot { padding-left: 16px; padding-right: 16px; }
+  .top { height: auto; padding-bottom: 12px; flex-wrap: wrap; }
+  .layout { grid-template-columns: 1fr; }
+  .map { padding-right: 0; }
+  .map svg { min-height: 320px; max-height: 70vh; }
+  .panel { border-left: 0; border-top: 1px solid var(--border); max-height: none; margin: 0 -16px; }
+  .panel section { padding: 18px 16px; }
+  .file { margin-left: 0; }
+  .group { flex-wrap: wrap; }
+}

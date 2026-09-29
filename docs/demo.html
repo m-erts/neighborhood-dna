@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Neighborhood DNA: the map</title>
+<meta name="description" content="Explore the functional profile of every H3 cell in Hiroshima, Belgrade, Amsterdam and London, or drop in the GeoJSON that dna.py wrote for your own city.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/demo.css">
+</head>
+<body>
+<header class="top">
+  <h1>Neighborhood DNA</h1>
+  <nav aria-label="Project">
+    <a href="index.html">Slides</a>
+    <a href="https://github.com/m-erts/neighborhood-dna">Code</a>
+    <a href="https://github.com/m-erts/neighborhood-dna/blob/main/CAVEATS.md">Caveats</a>
+  </nav>
+</header>
+
+<div class="controls" role="toolbar" aria-label="Map controls">
+  <div class="group" role="group" aria-label="City" data-cities></div>
+  <div class="group" role="group" aria-label="Colour cells by">
+    <button type="button" data-mode="share" aria-pressed="true">Top share</button>
+    <button type="button" data-mode="dominant" aria-pressed="false">Dominant function</button>
+  </div>
+  <label class="file">
+    <input type="file" accept=".geojson,.json,application/geo+json,application/json" data-file>
+    <span>Open your own GeoJSON</span>
+  </label>
+</div>
+
+<main class="layout">
+  <section class="map" aria-label="Map of H3 cells">
+    <p class="notice" data-notice hidden></p>
+    <svg data-map role="img" aria-label="H3 cells"></svg>
+    <div class="legend" data-legend></div>
+  </section>
+
+  <aside class="panel">
+    <section data-cell aria-live="polite">
+      <h2>Pick a cell</h2>
+      <p class="hint">Click a hexagon, or a row of the shortlist below, to read its DNA.</p>
+    </section>
+    <section>
+      <h2 data-city-title>City</h2>
+      <dl class="facts" data-city-facts></dl>
+      <h3>Whose places are these</h3>
+      <div data-providers></div>
+    </section>
+    <section>
+      <h2>Shortlist</h2>
+      <p class="hint">Cells where one function holds half the places or more, most mono-functional first.</p>
+      <ol class="shortlist" data-shortlist></ol>
+    </section>
+  </aside>
+</main>
+
+<footer class="foot">
+  <p>Data: <a href="https://overturemaps.org/">Overture Maps Foundation</a>, places theme. Licences per source, recorded in the <code>sources</code> column.
+  Made with <a href="https://github.com/m-erts/neighborhood-dna/blob/main/dna.py">dna.py</a>. Read the <a href="https://github.com/m-erts/neighborhood-dna/blob/main/CAVEATS.md">caveats</a> before you quote a number.</p>
+</footer>
+<div class="tip" role="tooltip" hidden></div>
+<script src="js/demo.js"></script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+{
+ "release": "2026-09-23.1",
+ "measured": "2026-09-29",
+ "machine": "Darwin arm64, Python 3.13.9, DuckDB 1.5.6",
+ "release_files": 16,
+ "release_gb": 11.0,
+ "cities": {
+  "hiroshima": {
+   "scan_seconds": 18.1,
+   "mib_read": 31.0,
+   "http_get": 45,
+   "dna_py_seconds": 17.2
+  },
+  "belgrade": {
+   "scan_seconds": 8.4,
+   "mib_read": 30.5,
+   "http_get": 45,
+   "dna_py_seconds": 12.0
+  },
+  "amsterdam": {
+   "scan_seconds": 6.8,
+   "mib_read": 32.0,
+   "http_get": 53,
+   "dna_py_seconds": 10.3
+  },
+  "london": {
+   "scan_seconds": 10.6,
+   "mib_read": 41.8,
+   "http_get": 113,
+   "dna_py_seconds": 11.9
+  }
+ }
+}

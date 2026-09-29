@@ -1,0 +1,1169 @@
+{
+ "meta": {
+  "release": "2026-09-23.1",
+  "compared_with": [
+   "2026-08-19.0"
+  ],
+  "generated": "2026-09-29",
+  "places_in_release": 81455423,
+  "h3_res": 8,
+  "taxonomy_level": 1,
+  "min_poi": 10,
+  "flag": 0.5,
+  "area_km2": 366.0,
+  "boxes": {
+   "hiroshima": [
+    132.35,
+    34.2999,
+    132.55,
+    34.4801
+   ],
+   "belgrade": [
+    20.35,
+    44.7002,
+    20.55,
+    44.9098
+   ],
+   "amsterdam": [
+    4.8,
+    52.2483,
+    5.0,
+    52.4917
+   ],
+   "london": [
+    -0.22,
+    51.3906,
+    -0.02,
+    51.6294
+   ]
+  }
+ },
+ "summary": [
+  {
+   "city": "amsterdam",
+   "cells": 360,
+   "places": 49532,
+   "flagged": 39,
+   "richness": 11.0,
+   "hill_q1": 7.467883530818671,
+   "hill_q2": 5.863645823892151,
+   "top_share": 0.2916666666666667,
+   "mean_cell_km2": 0.6175178735174145,
+   "tied_top_category": 27
+  },
+  {
+   "city": "belgrade",
+   "cells": 216,
+   "places": 31811,
+   "flagged": 10,
+   "richness": 11.0,
+   "hill_q1": 7.856179986931275,
+   "hill_q2": 6.382447917587367,
+   "top_share": 0.2566678520625889,
+   "mean_cell_km2": 0.7811520256626926,
+   "tied_top_category": 26
+  },
+  {
+   "city": "hiroshima",
+   "cells": 252,
+   "places": 24775,
+   "flagged": 13,
+   "richness": 9.5,
+   "hill_q1": 6.580255571062192,
+   "hill_q2": 5.331514239116798,
+   "top_share": 0.29520697167755994,
+   "mean_cell_km2": 0.5755782729558249,
+   "tied_top_category": 37
+  },
+  {
+   "city": "london",
+   "cells": 586,
+   "places": 215533,
+   "flagged": 15,
+   "richness": 12.0,
+   "hill_q1": 7.8360460132113925,
+   "hill_q2": 5.966932357211077,
+   "top_share": 0.3,
+   "mean_cell_km2": 0.6591711180829914,
+   "tied_top_category": 12
+  }
+ ],
+ "coverage": [
+  {
+   "city": "amsterdam",
+   "places_in_box": 51683,
+   "categorised_pct": 97.09575682526169,
+   "cells_with_places": 542,
+   "cells_kept": 360,
+   "places_in_kept_cells_pct": 98.70471483798971,
+   "confidence_under_half_pct": 25.855697231197876,
+   "median_update": "2026-09-14"
+  },
+  {
+   "city": "belgrade",
+   "places_in_box": 33718,
+   "categorised_pct": 95.96951183344208,
+   "cells_with_places": 357,
+   "cells_kept": 216,
+   "places_in_kept_cells_pct": 98.30649896473933,
+   "confidence_under_half_pct": 31.84352571326888,
+   "median_update": "2026-09-14"
+  },
+  {
+   "city": "hiroshima",
+   "places_in_box": 25896,
+   "categorised_pct": 98.43991350015446,
+   "cells_with_places": 457,
+   "cells_kept": 252,
+   "places_in_kept_cells_pct": 97.1873528950259,
+   "confidence_under_half_pct": 7.441303676243435,
+   "median_update": "2026-09-14"
+  },
+  {
+   "city": "london",
+   "places_in_box": 233119,
+   "categorised_pct": 92.49739403480626,
+   "cells_with_places": 609,
+   "cells_kept": 586,
+   "places_in_kept_cells_pct": 99.95547908676477,
+   "confidence_under_half_pct": 19.711821001291185,
+   "median_update": "2026-09-14"
+  }
+ ],
+ "branches": [
+  {
+   "branch": "services_and_business",
+   "four_cities": 29.801150583015616,
+   "hiroshima": 18.962811862545113,
+   "belgrade": 18.421459253994254,
+   "amsterdam": 25.907695986608744,
+   "london": 33.69630244540391
+  },
+  {
+   "branch": "shopping",
+   "four_cities": 16.504254438272024,
+   "hiroshima": 17.303467754589676,
+   "belgrade": 18.86337649494731,
+   "amsterdam": 17.3528356781316,
+   "london": 15.858256542487327
+  },
+  {
+   "branch": "food_and_drink",
+   "four_cities": 16.38128665088889,
+   "hiroshima": 31.382394476698572,
+   "belgrade": 17.478908495318148,
+   "amsterdam": 15.499581523255351,
+   "london": 14.648307973417305
+  },
+  {
+   "branch": "lifestyle_services",
+   "four_cities": 6.497210052462137,
+   "hiroshima": 7.323866310999529,
+   "belgrade": 9.617108068852561,
+   "amsterdam": 6.65577298632976,
+   "london": 5.894383408539667
+  },
+  {
+   "branch": "health_care",
+   "four_cities": 5.169899463020064,
+   "hiroshima": 5.5978346147811076,
+   "belgrade": 6.094131462653357,
+   "amsterdam": 5.1392929735761825,
+   "london": 4.987733560884668
+  },
+  {
+   "branch": "travel_and_transportation",
+   "four_cities": 4.855991744474173,
+   "hiroshima": 4.6328259846226265,
+   "belgrade": 4.345004480979017,
+   "amsterdam": 4.627157147981348,
+   "london": 5.012312815066619
+  },
+  {
+   "branch": "education",
+   "four_cities": 4.512732418387083,
+   "hiroshima": 3.6285893613682725,
+   "belgrade": 6.131215426929138,
+   "amsterdam": 4.455780957315372,
+   "london": 4.38762875123476
+  },
+  {
+   "branch": "sports_and_recreation",
+   "four_cities": 4.211492235727395,
+   "hiroshima": 2.867566295308332,
+   "belgrade": 6.264099632250687,
+   "amsterdam": 5.490016340520506,
+   "london": 3.7647997254543686
+  },
+  {
+   "branch": "arts_and_entertainment",
+   "four_cities": 3.8234330876037346,
+   "hiroshima": 2.000627647889534,
+   "belgrade": 3.733119070428629,
+   "amsterdam": 4.7925550994380455,
+   "london": 3.8269435001785475
+  },
+  {
+   "branch": "community_and_government",
+   "four_cities": 3.4449518324672033,
+   "hiroshima": 2.2595324023222974,
+   "belgrade": 4.12868135603696,
+   "amsterdam": 3.5949145111793075,
+   "london": 3.447588218653335
+  },
+  {
+   "branch": "cultural_and_historic",
+   "four_cities": 2.4880894266240707,
+   "hiroshima": 2.071238035462106,
+   "belgrade": 2.367193052937359,
+   "amsterdam": 2.359411741261807,
+   "london": 2.585459284233568
+  },
+  {
+   "branch": "lodging",
+   "four_cities": 1.834629953469978,
+   "hiroshima": 1.2239133845912442,
+   "belgrade": 2.23430884761581,
+   "amsterdam": 2.6882148977721094,
+   "london": 1.6482013087293452
+  },
+  {
+   "branch": "geographic_entities",
+   "four_cities": 0.47487811358763155,
+   "hiroshima": 0.7453318688215911,
+   "belgrade": 0.3213943570567694,
+   "amsterdam": 1.4367701566298672,
+   "london": 0.24208246571657802
+  }
+ ],
+ "bins_richness": [
+  {
+   "places_per_cell": "1. 10-19",
+   "hiroshima": 7.0,
+   "belgrade": 6.0,
+   "amsterdam": 7.0,
+   "london": 6.0
+  },
+  {
+   "places_per_cell": "2. 20-39",
+   "hiroshima": 8.0,
+   "belgrade": 9.0,
+   "amsterdam": 9.0,
+   "london": 9.0
+  },
+  {
+   "places_per_cell": "3. 40-79",
+   "hiroshima": 10.0,
+   "belgrade": 10.0,
+   "amsterdam": 11.0,
+   "london": 11.0
+  },
+  {
+   "places_per_cell": "4. 80-159",
+   "hiroshima": 11.0,
+   "belgrade": 12.0,
+   "amsterdam": 12.0,
+   "london": 12.0
+  },
+  {
+   "places_per_cell": "5. 160-319",
+   "hiroshima": 12.0,
+   "belgrade": 12.0,
+   "amsterdam": 13.0,
+   "london": 12.0
+  },
+  {
+   "places_per_cell": "6. 320+",
+   "hiroshima": 13.0,
+   "belgrade": 12.0,
+   "amsterdam": 13.0,
+   "london": 13.0
+  }
+ ],
+ "bins_hill_q2": [
+  {
+   "places_per_cell": "1. 10-19",
+   "hiroshima": 4.454545454545455,
+   "belgrade": 4.513468013468014,
+   "amsterdam": 4.571428571428571,
+   "london": 4.378378378378378
+  },
+  {
+   "places_per_cell": "2. 20-39",
+   "hiroshima": 5.365079365079365,
+   "belgrade": 5.38387754588253,
+   "amsterdam": 5.565217391304348,
+   "london": 5.619883040935672
+  },
+  {
+   "places_per_cell": "3. 40-79",
+   "hiroshima": 5.520215633423181,
+   "belgrade": 6.722222222222222,
+   "amsterdam": 6.314288423248317,
+   "london": 6.1305489118029435
+  },
+  {
+   "places_per_cell": "4. 80-159",
+   "hiroshima": 5.607463247962901,
+   "belgrade": 7.291139240506329,
+   "amsterdam": 6.277727682596934,
+   "london": 6.024946004140375
+  },
+  {
+   "places_per_cell": "5. 160-319",
+   "hiroshima": 5.562831641961124,
+   "belgrade": 6.805940491919923,
+   "amsterdam": 5.7220258193295575,
+   "london": 6.1255198345176645
+  },
+  {
+   "places_per_cell": "6. 320+",
+   "hiroshima": 5.29606599065048,
+   "belgrade": 7.276586707018431,
+   "amsterdam": 6.688238980572382,
+   "london": 5.911385366134766
+  }
+ ],
+ "bins_cells": [
+  {
+   "places_per_cell": "1. 10-19",
+   "hiroshima": 61,
+   "belgrade": 40,
+   "amsterdam": 67,
+   "london": 29
+  },
+  {
+   "places_per_cell": "2. 20-39",
+   "hiroshima": 53,
+   "belgrade": 38,
+   "amsterdam": 73,
+   "london": 27
+  },
+  {
+   "places_per_cell": "3. 40-79",
+   "hiroshima": 61,
+   "belgrade": 41,
+   "amsterdam": 66,
+   "london": 74
+  },
+  {
+   "places_per_cell": "4. 80-159",
+   "hiroshima": 46,
+   "belgrade": 39,
+   "amsterdam": 67,
+   "london": 120
+  },
+  {
+   "places_per_cell": "5. 160-319",
+   "hiroshima": 20,
+   "belgrade": 38,
+   "amsterdam": 50,
+   "london": 162
+  },
+  {
+   "places_per_cell": "6. 320+",
+   "hiroshima": 11,
+   "belgrade": 20,
+   "amsterdam": 37,
+   "london": 174
+  }
+ ],
+ "bins_gap": [
+  {
+   "largest_gap_richness": 1.0,
+   "largest_gap_hill_q2": 1.980520716367951,
+   "r_richness": 0.8072372639125236,
+   "r_hill_q2": 0.24290545664948127
+  }
+ ],
+ "providers": [
+  {
+   "provider": "AllThePlaces",
+   "hiroshima": 12.827553742350542,
+   "belgrade": 1.1897771871813096,
+   "amsterdam": 1.1637638994061617,
+   "london": 2.9383802735253606
+  },
+  {
+   "provider": "DAC",
+   "hiroshima": 0.007845598619174643,
+   "belgrade": null,
+   "amsterdam": 0.04782591367422582,
+   "london": 0.16046079145198466
+  },
+  {
+   "provider": "Foursquare",
+   "hiroshima": 9.246037972697318,
+   "belgrade": 4.548966284495813,
+   "amsterdam": 7.831493364154477,
+   "london": 17.145189190693273
+  },
+  {
+   "provider": "Microsoft",
+   "hiroshima": 3.648203357916209,
+   "belgrade": 1.3442937049970642,
+   "amsterdam": 6.80124347375553,
+   "london": 18.83698389363212
+  },
+  {
+   "provider": "PinMeTo",
+   "hiroshima": 0.019613996547936607,
+   "belgrade": 0.19778114280416575,
+   "amsterdam": 0.5719182176876171,
+   "london": 0.10666468795941177
+  },
+  {
+   "provider": "RenderSEO",
+   "hiroshima": null,
+   "belgrade": null,
+   "amsterdam": null,
+   "london": 0.0009275190257340154
+  },
+  {
+   "provider": "meta",
+   "hiroshima": 74.25074533186883,
+   "belgrade": 92.71918168052164,
+   "amsterdam": 83.583755131322,
+   "london": 60.811393643712115
+  }
+ ],
+ "meta_only": [
+  {
+   "city": "belgrade",
+   "all_sources": 6.382447917587367,
+   "rank_all": 1,
+   "meta_only": 6.517906336088155,
+   "rank_meta": 2,
+   "cells_meta": 215
+  },
+  {
+   "city": "london",
+   "all_sources": 5.966932357211077,
+   "rank_all": 2,
+   "meta_only": 6.738396573793501,
+   "rank_meta": 1,
+   "cells_meta": 564
+  },
+  {
+   "city": "amsterdam",
+   "all_sources": 5.863645823892151,
+   "rank_all": 3,
+   "meta_only": 6.121822033898306,
+   "rank_meta": 3,
+   "cells_meta": 350
+  },
+  {
+   "city": "hiroshima",
+   "all_sources": 5.331514239116798,
+   "rank_all": 4,
+   "meta_only": 5.188118299445471,
+   "rank_meta": 4,
+   "cells_meta": 224
+  }
+ ],
+ "hdbscan": [
+  {
+   "signature_and_min_cluster_size": "shares, 05",
+   "hiroshima": "2 clusters, 96% noise",
+   "belgrade": "2 clusters, 88% noise",
+   "amsterdam": "2 clusters, 46% noise",
+   "london": "2 clusters, 82% noise"
+  },
+  {
+   "signature_and_min_cluster_size": "shares, 10",
+   "hiroshima": "0 clusters, 100% noise",
+   "belgrade": "0 clusters, 100% noise",
+   "amsterdam": "0 clusters, 100% noise",
+   "london": "0 clusters, 100% noise"
+  },
+  {
+   "signature_and_min_cluster_size": "shares, 15",
+   "hiroshima": "0 clusters, 100% noise",
+   "belgrade": "0 clusters, 100% noise",
+   "amsterdam": "0 clusters, 100% noise",
+   "london": "0 clusters, 100% noise"
+  },
+  {
+   "signature_and_min_cluster_size": "shares, 25",
+   "hiroshima": "0 clusters, 100% noise",
+   "belgrade": "0 clusters, 100% noise",
+   "amsterdam": "0 clusters, 100% noise",
+   "london": "0 clusters, 100% noise"
+  },
+  {
+   "signature_and_min_cluster_size": "tf-idf, 05",
+   "hiroshima": "0 clusters, 100% noise",
+   "belgrade": "2 clusters, 88% noise",
+   "amsterdam": "2 clusters, 49% noise",
+   "london": "2 clusters, 84% noise"
+  },
+  {
+   "signature_and_min_cluster_size": "tf-idf, 10",
+   "hiroshima": "0 clusters, 100% noise",
+   "belgrade": "0 clusters, 100% noise",
+   "amsterdam": "0 clusters, 100% noise",
+   "london": "0 clusters, 100% noise"
+  },
+  {
+   "signature_and_min_cluster_size": "tf-idf, 15",
+   "hiroshima": "0 clusters, 100% noise",
+   "belgrade": "0 clusters, 100% noise",
+   "amsterdam": "0 clusters, 100% noise",
+   "london": "0 clusters, 100% noise"
+  },
+  {
+   "signature_and_min_cluster_size": "tf-idf, 25",
+   "hiroshima": "0 clusters, 100% noise",
+   "belgrade": "0 clusters, 100% noise",
+   "amsterdam": "0 clusters, 100% noise",
+   "london": "0 clusters, 100% noise"
+  },
+  {
+   "signature_and_min_cluster_size": "tf-idf, L2 norm, 05",
+   "hiroshima": "0 clusters, 100% noise",
+   "belgrade": "2 clusters, 87% noise",
+   "amsterdam": "2 clusters, 20% noise",
+   "london": "4 clusters, 92% noise"
+  },
+  {
+   "signature_and_min_cluster_size": "tf-idf, L2 norm, 10",
+   "hiroshima": "0 clusters, 100% noise",
+   "belgrade": "0 clusters, 100% noise",
+   "amsterdam": "2 clusters, 82% noise",
+   "london": "2 clusters, 92% noise"
+  },
+  {
+   "signature_and_min_cluster_size": "tf-idf, L2 norm, 15",
+   "hiroshima": "0 clusters, 100% noise",
+   "belgrade": "0 clusters, 100% noise",
+   "amsterdam": "2 clusters, 87% noise",
+   "london": "0 clusters, 100% noise"
+  },
+  {
+   "signature_and_min_cluster_size": "tf-idf, L2 norm, 25",
+   "hiroshima": "0 clusters, 100% noise",
+   "belgrade": "0 clusters, 100% noise",
+   "amsterdam": "0 clusters, 100% noise",
+   "london": "0 clusters, 100% noise"
+  },
+  {
+   "signature_and_min_cluster_size": "tf-idf, not rounded, 10",
+   "hiroshima": "0 clusters, 100% noise",
+   "belgrade": "0 clusters, 100% noise",
+   "amsterdam": "0 clusters, 100% noise",
+   "london": "2 clusters, 96% noise"
+  }
+ ],
+ "by_h3_res": [
+  {
+   "h3_res": "7",
+   "hiroshima": 5.792563436898082,
+   "belgrade": 6.639203852042514,
+   "amsterdam": 6.444526390835116,
+   "london": 6.205128205128206
+  },
+  {
+   "h3_res": "8",
+   "hiroshima": 5.331514239116798,
+   "belgrade": 6.382447917587367,
+   "amsterdam": 5.863645823892151,
+   "london": 5.966932357211077
+  },
+  {
+   "h3_res": "9",
+   "hiroshima": 4.587301587301587,
+   "belgrade": 5.7467018469657,
+   "amsterdam": 4.853321829163071,
+   "london": 5.123580034423408
+  }
+ ],
+ "by_min_poi": [
+  {
+   "min_poi": "05",
+   "hiroshima": 5.085604140363728,
+   "belgrade": 5.730158730158731,
+   "amsterdam": 5.565217391304348,
+   "london": 5.9521724486359044
+  },
+  {
+   "min_poi": "10",
+   "hiroshima": 5.331514239116798,
+   "belgrade": 6.382447917587367,
+   "amsterdam": 5.863645823892151,
+   "london": 5.966932357211077
+  },
+  {
+   "min_poi": "20",
+   "hiroshima": 5.453608247422681,
+   "belgrade": 6.793969849246231,
+   "amsterdam": 6.136631003658931,
+   "london": 5.996813256851496
+  }
+ ],
+ "by_shift": [
+  {
+   "box": "1. centre",
+   "hiroshima": 5.331514239116798,
+   "belgrade": 6.382447917587367,
+   "amsterdam": 5.863645823892151,
+   "london": 5.966932357211077
+  },
+  {
+   "box": "2. north",
+   "hiroshima": 5.327096040525173,
+   "belgrade": 6.473220507715281,
+   "amsterdam": 5.933191637457429,
+   "london": 5.95377126386785
+  },
+  {
+   "box": "3. south",
+   "hiroshima": 5.301975051975052,
+   "belgrade": 6.391304347826088,
+   "amsterdam": 5.8,
+   "london": 5.869141336397029
+  },
+  {
+   "box": "4. east",
+   "hiroshima": 5.327096040525173,
+   "belgrade": 6.652773985982176,
+   "amsterdam": 5.943820224719102,
+   "london": 5.968421052631578
+  },
+  {
+   "box": "5. west",
+   "hiroshima": 5.367471189388997,
+   "belgrade": 6.181353767560663,
+   "amsterdam": 5.599559821483158,
+   "london": 5.854819976771196
+  }
+ ],
+ "by_level": [
+  {
+   "taxonomy_level": "1",
+   "hiroshima": 6.580255571062192,
+   "belgrade": 7.856179986931275,
+   "amsterdam": 7.4678835308186695,
+   "london": 7.8360460132113925
+  },
+  {
+   "taxonomy_level": "2",
+   "hiroshima": 17.544282886335953,
+   "belgrade": 22.882830874465007,
+   "amsterdam": 22.593681767005393,
+   "london": 34.242382455448364
+  },
+  {
+   "taxonomy_level": "3",
+   "hiroshima": 25.112143814111835,
+   "belgrade": 34.791030730119786,
+   "amsterdam": 37.87664021186174,
+   "london": 82.02097092951792
+  },
+  {
+   "taxonomy_level": "9",
+   "hiroshima": 27.66666934828305,
+   "belgrade": 38.2848319442599,
+   "amsterdam": 41.642420031699324,
+   "london": 103.37957778553525
+  }
+ ],
+ "categories_per_level": [
+  {
+   "taxonomy_level": 1,
+   "categories": 13
+  },
+  {
+   "taxonomy_level": 2,
+   "categories": 126
+  },
+  {
+   "taxonomy_level": 3,
+   "categories": 835
+  },
+  {
+   "taxonomy_level": 9,
+   "categories": 1630
+  }
+ ],
+ "districts": [
+  {
+   "city": "london",
+   "district": "City of London, Bank",
+   "known_as": "financial district",
+   "h3": "88194ad305fffff",
+   "places": 3563,
+   "hill_q1": 4.947655966956304,
+   "hill_q2": 2.892988559051179,
+   "top_share": 0.5610440639910188,
+   "flagged": true,
+   "dna": {
+    "services_and_business": 0.5610440639910188,
+    "food_and_drink": 0.123210777434746,
+    "shopping": 0.09261857984844232,
+    "health_care": 0.05725512208812798,
+    "lifestyle_services": 0.03199550940218917,
+    "community_and_government": 0.025540275049115914,
+    "sports_and_recreation": 0.023856300870053325,
+    "education": 0.02329497614369913,
+    "travel_and_transportation": 0.021330339601459445,
+    "cultural_and_historic": 0.019927027785573953,
+    "arts_and_entertainment": 0.013191131069323604,
+    "lodging": 0.006455234353073253,
+    "geographic_entities": 0.000280662363177098
+   }
+  },
+  {
+   "city": "london",
+   "district": "Shoreditch",
+   "known_as": "bars, studios, offices",
+   "h3": "88194ad347fffff",
+   "places": 1753,
+   "hill_q1": 6.500067614767182,
+   "hill_q2": 4.780504992836264,
+   "top_share": 0.3399885909868796,
+   "flagged": false,
+   "dna": {
+    "services_and_business": 0.3399885909868796,
+    "shopping": 0.20821448944666288,
+    "food_and_drink": 0.20193953223046207,
+    "arts_and_entertainment": 0.05932686822589846,
+    "lifestyle_services": 0.05647461494580719,
+    "sports_and_recreation": 0.026240730176839703,
+    "education": 0.023958927552766685,
+    "community_and_government": 0.02167712492869367,
+    "travel_and_transportation": 0.021106674272675412,
+    "lodging": 0.01540216771249287,
+    "health_care": 0.01426126640045636,
+    "cultural_and_historic": 0.011409013120365089
+   }
+  },
+  {
+   "city": "london",
+   "district": "Muswell Hill",
+   "known_as": "residential suburb",
+   "h3": "88195da633fffff",
+   "places": 335,
+   "hill_q1": 7.868898937764364,
+   "hill_q2": 6.08364503713341,
+   "top_share": 0.2537313432835821,
+   "flagged": false,
+   "dna": {
+    "services_and_business": 0.2537313432835821,
+    "shopping": 0.2417910447761194,
+    "food_and_drink": 0.14925373134328357,
+    "lifestyle_services": 0.08656716417910448,
+    "health_care": 0.07761194029850746,
+    "education": 0.03880597014925373,
+    "travel_and_transportation": 0.03582089552238806,
+    "cultural_and_historic": 0.03283582089552239,
+    "sports_and_recreation": 0.026865671641791045,
+    "community_and_government": 0.023880597014925373,
+    "arts_and_entertainment": 0.020895522388059702,
+    "lodging": 0.011940298507462687
+   }
+  },
+  {
+   "city": "amsterdam",
+   "district": "Zuidas",
+   "known_as": "financial district",
+   "h3": "881969531bfffff",
+   "places": 189,
+   "hill_q1": 5.557180808325,
+   "hill_q2": 3.381709741550696,
+   "top_share": 0.5079365079365079,
+   "flagged": true,
+   "dna": {
+    "services_and_business": 0.5079365079365079,
+    "food_and_drink": 0.13227513227513227,
+    "shopping": 0.08994708994708994,
+    "education": 0.07407407407407407,
+    "community_and_government": 0.047619047619047616,
+    "travel_and_transportation": 0.047619047619047616,
+    "sports_and_recreation": 0.031746031746031744,
+    "arts_and_entertainment": 0.021164021164021163,
+    "health_care": 0.021164021164021163,
+    "lifestyle_services": 0.010582010582010581,
+    "cultural_and_historic": 0.005291005291005291,
+    "geographic_entities": 0.005291005291005291,
+    "lodging": 0.005291005291005291
+   }
+  },
+  {
+   "city": "amsterdam",
+   "district": "De Pijp",
+   "known_as": "cafes and market streets",
+   "h3": "881969535bfffff",
+   "places": 1035,
+   "hill_q1": 7.502908234921322,
+   "hill_q2": 5.602963559619016,
+   "top_share": 0.28502415458937197,
+   "flagged": false,
+   "dna": {
+    "food_and_drink": 0.28502415458937197,
+    "shopping": 0.2318840579710145,
+    "services_and_business": 0.17294685990338166,
+    "lifestyle_services": 0.07729468599033816,
+    "lodging": 0.044444444444444446,
+    "sports_and_recreation": 0.04057971014492753,
+    "health_care": 0.03671497584541063,
+    "arts_and_entertainment": 0.034782608695652174,
+    "travel_and_transportation": 0.024154589371980676,
+    "community_and_government": 0.01932367149758454,
+    "education": 0.018357487922705314,
+    "cultural_and_historic": 0.008695652173913044,
+    "geographic_entities": 0.005797101449275362
+   }
+  },
+  {
+   "city": "amsterdam",
+   "district": "Buitenveldert",
+   "known_as": "residential suburb",
+   "h3": "8819695313fffff",
+   "places": 281,
+   "hill_q1": 9.42956736406834,
+   "hill_q2": 8.03674300254453,
+   "top_share": 0.18505338078291814,
+   "flagged": false,
+   "dna": {
+    "education": 0.18505338078291814,
+    "services_and_business": 0.17793594306049823,
+    "food_and_drink": 0.1423487544483986,
+    "shopping": 0.13167259786476868,
+    "community_and_government": 0.08540925266903915,
+    "health_care": 0.07473309608540925,
+    "lifestyle_services": 0.05693950177935943,
+    "travel_and_transportation": 0.042704626334519574,
+    "cultural_and_historic": 0.03914590747330961,
+    "sports_and_recreation": 0.03202846975088968,
+    "arts_and_entertainment": 0.014234875444839857,
+    "lodging": 0.014234875444839857,
+    "geographic_entities": 0.0035587188612099642
+   }
+  },
+  {
+   "city": "hiroshima",
+   "district": "Kamiyacho",
+   "known_as": "offices, prefectural government",
+   "h3": "882e69a2bbfffff",
+   "places": 428,
+   "hill_q1": 7.761633184878739,
+   "hill_q2": 5.721639180409796,
+   "top_share": 0.308411214953271,
+   "flagged": false,
+   "dna": {
+    "food_and_drink": 0.308411214953271,
+    "shopping": 0.20093457943925233,
+    "services_and_business": 0.1542056074766355,
+    "community_and_government": 0.0794392523364486,
+    "travel_and_transportation": 0.0514018691588785,
+    "education": 0.037383177570093455,
+    "lifestyle_services": 0.037383177570093455,
+    "sports_and_recreation": 0.037383177570093455,
+    "arts_and_entertainment": 0.030373831775700934,
+    "cultural_and_historic": 0.030373831775700934,
+    "health_care": 0.02102803738317757,
+    "lodging": 0.007009345794392523,
+    "geographic_entities": 0.004672897196261682
+   }
+  },
+  {
+   "city": "hiroshima",
+   "district": "Nagarekawa",
+   "known_as": "nightlife quarter",
+   "h3": "882e69a295fffff",
+   "places": 3825,
+   "hill_q1": 4.1208565238564745,
+   "hill_q2": 2.5078544944300756,
+   "top_share": 0.6065359477124183,
+   "flagged": true,
+   "dna": {
+    "food_and_drink": 0.6065359477124183,
+    "shopping": 0.13176470588235295,
+    "lifestyle_services": 0.08418300653594771,
+    "services_and_business": 0.0661437908496732,
+    "arts_and_entertainment": 0.027450980392156862,
+    "health_care": 0.022745098039215685,
+    "travel_and_transportation": 0.018823529411764704,
+    "lodging": 0.011764705882352941,
+    "sports_and_recreation": 0.010718954248366013,
+    "education": 0.009934640522875817,
+    "community_and_government": 0.007320261437908497,
+    "cultural_and_historic": 0.00261437908496732
+   }
+  },
+  {
+   "city": "hiroshima",
+   "district": "Ushita",
+   "known_as": "residential suburb",
+   "h3": "882e69a2a3fffff",
+   "places": 86,
+   "hill_q1": 6.86422668471456,
+   "hill_q2": 5.9168,
+   "top_share": 0.26744186046511625,
+   "flagged": false,
+   "dna": {
+    "food_and_drink": 0.26744186046511625,
+    "shopping": 0.19767441860465115,
+    "services_and_business": 0.16279069767441862,
+    "cultural_and_historic": 0.12790697674418605,
+    "health_care": 0.08139534883720931,
+    "lifestyle_services": 0.06976744186046512,
+    "education": 0.05813953488372093,
+    "sports_and_recreation": 0.023255813953488372,
+    "lodging": 0.011627906976744186
+   }
+  }
+ ],
+ "districts_table": [
+  {
+   "city": "london",
+   "district": "City of London, Bank",
+   "known_as": "financial district",
+   "h3": "88194ad305fffff",
+   "places": 3563,
+   "hill_q2": 2.892988559051179,
+   "top_share": 0.5610440639910188,
+   "top_three": "services_and_business 56%, food_and_drink 12%, shopping 9%"
+  },
+  {
+   "city": "london",
+   "district": "Shoreditch",
+   "known_as": "bars, studios, offices",
+   "h3": "88194ad347fffff",
+   "places": 1753,
+   "hill_q2": 4.780504992836264,
+   "top_share": 0.3399885909868796,
+   "top_three": "services_and_business 34%, shopping 21%, food_and_drink 20%"
+  },
+  {
+   "city": "london",
+   "district": "Muswell Hill",
+   "known_as": "residential suburb",
+   "h3": "88195da633fffff",
+   "places": 335,
+   "hill_q2": 6.083645037133409,
+   "top_share": 0.2537313432835821,
+   "top_three": "services_and_business 25%, shopping 24%, food_and_drink 15%"
+  },
+  {
+   "city": "amsterdam",
+   "district": "Zuidas",
+   "known_as": "financial district",
+   "h3": "881969531bfffff",
+   "places": 189,
+   "hill_q2": 3.3817097415506963,
+   "top_share": 0.5079365079365079,
+   "top_three": "services_and_business 51%, food_and_drink 13%, shopping 9%"
+  },
+  {
+   "city": "amsterdam",
+   "district": "De Pijp",
+   "known_as": "cafes and market streets",
+   "h3": "881969535bfffff",
+   "places": 1035,
+   "hill_q2": 5.602963559619016,
+   "top_share": 0.28502415458937197,
+   "top_three": "food_and_drink 29%, shopping 23%, services_and_business 17%"
+  },
+  {
+   "city": "amsterdam",
+   "district": "Buitenveldert",
+   "known_as": "residential suburb",
+   "h3": "8819695313fffff",
+   "places": 281,
+   "hill_q2": 8.03674300254453,
+   "top_share": 0.18505338078291814,
+   "top_three": "education 19%, services_and_business 18%, food_and_drink 14%"
+  },
+  {
+   "city": "hiroshima",
+   "district": "Kamiyacho",
+   "known_as": "offices, prefectural government",
+   "h3": "882e69a2bbfffff",
+   "places": 428,
+   "hill_q2": 5.721639180409796,
+   "top_share": 0.308411214953271,
+   "top_three": "food_and_drink 31%, shopping 20%, services_and_business 15%"
+  },
+  {
+   "city": "hiroshima",
+   "district": "Nagarekawa",
+   "known_as": "nightlife quarter",
+   "h3": "882e69a295fffff",
+   "places": 3825,
+   "hill_q2": 2.5078544944300756,
+   "top_share": 0.6065359477124183,
+   "top_three": "food_and_drink 61%, shopping 13%, lifestyle_services 8%"
+  },
+  {
+   "city": "hiroshima",
+   "district": "Ushita",
+   "known_as": "residential suburb",
+   "h3": "882e69a2a3fffff",
+   "places": 86,
+   "hill_q2": 5.9168,
+   "top_share": 0.26744186046511625,
+   "top_three": "food_and_drink 27%, shopping 20%, services_and_business 16%"
+  }
+ ],
+ "drift": [
+  {
+   "city": "amsterdam",
+   "flagged_old": 38,
+   "flagged_new": 39,
+   "flagged_in_both": 32,
+   "hill_q2_old": 5.884419713831479,
+   "hill_q2_new": 5.863645823892151,
+   "cells_in_one_release": 4
+  },
+  {
+   "city": "belgrade",
+   "flagged_old": 10,
+   "flagged_new": 10,
+   "flagged_in_both": 8,
+   "hill_q2_old": 6.346690815787486,
+   "hill_q2_new": 6.382447917587367,
+   "cells_in_one_release": 3
+  },
+  {
+   "city": "hiroshima",
+   "flagged_old": 16,
+   "flagged_new": 13,
+   "flagged_in_both": 13,
+   "hill_q2_old": 5.294458909476983,
+   "hill_q2_new": 5.331514239116798,
+   "cells_in_one_release": 0
+  },
+  {
+   "city": "london",
+   "flagged_old": 17,
+   "flagged_new": 15,
+   "flagged_in_both": 14,
+   "hill_q2_old": 5.860262753796282,
+   "hill_q2_new": 5.966932357211077,
+   "cells_in_one_release": 1
+  }
+ ],
+ "stage": [
+  {
+   "number": "hiroshima: cells",
+   "on_stage": 255.0,
+   "now": 252.0,
+   "change_pct": -1.1764705882352942
+  },
+  {
+   "number": "hiroshima: flagged cells",
+   "on_stage": 15.0,
+   "now": 13.0,
+   "change_pct": -13.333333333333334
+  },
+  {
+   "number": "hiroshima: median Hill q2",
+   "on_stage": 5.32,
+   "now": 5.331514239116798,
+   "change_pct": 0.21643306610521612
+  },
+  {
+   "number": "hiroshima: median Hill q2, Meta only",
+   "on_stage": 5.19,
+   "now": 5.188118299445471,
+   "change_pct": -0.03625627272695713
+  },
+  {
+   "number": "belgrade: cells",
+   "on_stage": 221.0,
+   "now": 216.0,
+   "change_pct": -2.262443438914027
+  },
+  {
+   "number": "belgrade: flagged cells",
+   "on_stage": 12.0,
+   "now": 10.0,
+   "change_pct": -16.666666666666668
+  },
+  {
+   "number": "belgrade: median Hill q2",
+   "on_stage": 6.31,
+   "now": 6.382447917587367,
+   "change_pct": 1.1481444942530483
+  },
+  {
+   "number": "belgrade: median Hill q2, Meta only",
+   "on_stage": 6.51,
+   "now": 6.517906336088155,
+   "change_pct": 0.12144909505614179
+  },
+  {
+   "number": "amsterdam: cells",
+   "on_stage": 364.0,
+   "now": 360.0,
+   "change_pct": -1.098901098901099
+  },
+  {
+   "number": "amsterdam: flagged cells",
+   "on_stage": 36.0,
+   "now": 39.0,
+   "change_pct": 8.333333333333334
+  },
+  {
+   "number": "amsterdam: median Hill q2",
+   "on_stage": 5.81,
+   "now": 5.863645823892151,
+   "change_pct": 0.9233360394518303
+  },
+  {
+   "number": "amsterdam: median Hill q2, Meta only",
+   "on_stage": 5.97,
+   "now": 6.121822033898306,
+   "change_pct": 2.5430826448627557
+  },
+  {
+   "number": "london: cells",
+   "on_stage": 586.0,
+   "now": 586.0,
+   "change_pct": 0.0
+  },
+  {
+   "number": "london: flagged cells",
+   "on_stage": 15.0,
+   "now": 15.0,
+   "change_pct": 0.0
+  },
+  {
+   "number": "london: median Hill q2",
+   "on_stage": 5.81,
+   "now": 5.966932357211077,
+   "change_pct": 2.7010732738567476
+  },
+  {
+   "number": "london: median Hill q2, Meta only",
+   "on_stage": 6.72,
+   "now": 6.738396573793501,
+   "change_pct": 0.273758538593775
+  },
+  {
+   "number": "belgrade: places from Meta, %",
+   "on_stage": 93.0,
+   "now": 92.71918168052164,
+   "change_pct": -0.3019551822347921
+  },
+  {
+   "number": "london: places from Meta, %",
+   "on_stage": 62.0,
+   "now": 60.811393643712115,
+   "change_pct": -1.9171070262707817
+  },
+  {
+   "number": "largest gap in a density bin, richness",
+   "on_stage": 1.0,
+   "now": 1.0,
+   "change_pct": 0.0
+  },
+  {
+   "number": "largest gap in a density bin, Hill q2",
+   "on_stage": 2.2,
+   "now": 1.980520716367951,
+   "change_pct": -9.976331074184053
+  }
+ ]
+}
