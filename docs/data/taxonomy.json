@@ -1,0 +1,126 @@
+{
+ "clusters": [
+  {
+   "name": "Food, beverage and nightlife",
+   "colour": "#F43F5E",
+   "branches": [
+    {
+     "key": "food_and_drink",
+     "label": "food and drink",
+     "colour": "#F43F5E"
+    }
+   ]
+  },
+  {
+   "name": "Retail, commerce and services",
+   "colour": "#F59E0B",
+   "branches": [
+    {
+     "key": "shopping",
+     "label": "shopping",
+     "colour": "#F59E0B"
+    },
+    {
+     "key": "services_and_business",
+     "label": "services and business",
+     "colour": "#FCD34D"
+    },
+    {
+     "key": "lifestyle_services",
+     "label": "lifestyle",
+     "colour": "#B45309"
+    }
+   ]
+  },
+  {
+   "name": "Civic, arts and culture",
+   "colour": "#10B981",
+   "branches": [
+    {
+     "key": "health_care",
+     "label": "health",
+     "colour": "#10B981"
+    },
+    {
+     "key": "education",
+     "label": "education",
+     "colour": "#6EE7B7"
+    },
+    {
+     "key": "community_and_government",
+     "label": "civic",
+     "colour": "#047857"
+    },
+    {
+     "key": "cultural_and_historic",
+     "label": "heritage",
+     "colour": "#34D399"
+    },
+    {
+     "key": "arts_and_entertainment",
+     "label": "arts",
+     "colour": "#A7F3D0"
+    },
+    {
+     "key": "sports_and_recreation",
+     "label": "sport",
+     "colour": "#059669"
+    }
+   ]
+  },
+  {
+   "name": "Transit and mobility",
+   "colour": "#818CF8",
+   "branches": [
+    {
+     "key": "travel_and_transportation",
+     "label": "transport",
+     "colour": "#818CF8"
+    },
+    {
+     "key": "lodging",
+     "label": "lodging",
+     "colour": "#C7D2FE"
+    }
+   ]
+  },
+  {
+   "name": "Other",
+   "colour": "#64748B",
+   "branches": [
+    {
+     "key": "geographic_entities",
+     "label": "geographic",
+     "colour": "#64748B"
+    }
+   ]
+  }
+ ],
+ "ramp": [
+  {
+   "below": 0.25,
+   "colour": "#0C4A6E",
+   "label": "under 0.25"
+  },
+  {
+   "below": 0.3,
+   "colour": "#0369A1",
+   "label": "0.25 to 0.30"
+  },
+  {
+   "below": 0.4,
+   "colour": "#0EA5E9",
+   "label": "0.30 to 0.40"
+  },
+  {
+   "below": 0.5,
+   "colour": "#38BDF8",
+   "label": "0.40 to 0.50"
+  },
+  {
+   "below": 9,
+   "colour": "#BAE6FD",
+   "label": "0.50 and over"
+  }
+ ]
+}

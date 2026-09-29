@@ -1,0 +1,72 @@
+/* Spatial Terminal. Every value here comes from DESIGN.md in the repository root. */
+:root {
+  --canvas: #0B0F19;
+  --surface: #111827;
+  --border: rgba(255, 255, 255, 0.08);
+  --accent: #38BDF8;
+
+  --text: #E5E7EB;
+  --text-2: #9CA3AF;
+  --text-3: #7B8494;
+
+  /* semantic DNA clusters */
+  --food: #F43F5E;
+  --retail: #F59E0B;
+  --civic: #10B981;
+  --transit: #818CF8;
+  --other: #64748B;
+
+  --sans: Inter, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  --mono: "JetBrains Mono", "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { background: var(--canvas); color-scheme: dark; }
+
+body {
+  margin: 0;
+  background: var(--canvas);
+  color: var(--text);
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a { color: var(--accent); text-underline-offset: 0.2em; }
+a:hover { text-decoration-thickness: 2px; }
+
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+code, kbd, pre, .mono { font-family: var(--mono); font-variant-ligatures: none; }
+
+button {
+  font: 500 13px/1 var(--mono);
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+button:hover { border-color: var(--accent); }
+button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+
+.tip {
+  position: fixed;
+  z-index: 50;
+  pointer-events: none;
+  max-width: 320px;
+  padding: 8px 10px;
+  font: 13px/1.45 var(--mono);
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 4px;
+  white-space: pre-line;
+}
+.tip[hidden] { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}

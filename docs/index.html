@@ -1,0 +1,222 @@
+<!doctype html>
+<!-- Built by docs/build.py from docs/slides.template.html. Edit the template, not index.html. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Neighborhood DNA: 50 Lines of Python</title>
+<meta name="description" content="Slides of the FOSS4G Hiroshima 2026 lightning talk. The functional profile of any neighbourhood from Overture Maps Places, in 50 lines of Python.">
+<meta name="author" content="Marija Ercegovac">
+<meta property="og:title" content="50 Lines of Python: Neighborhood DNA from Overture Maps Places">
+<meta property="og:description" content="FOSS4G Hiroshima 2026 lightning talk. DuckDB reads Overture Places on S3; two checks tell you when the numbers lie.">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://m-erts.github.io/neighborhood-dna/assets/banner.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/slides.css">
+</head>
+<body>
+<main class="deck">
+
+<section class="slide title" data-label="title">
+  <h1>50 Lines of Python</h1>
+  <p class="sub">Neighborhood DNA from Overture Maps Places</p>
+  <p class="premise">Any POI dataset will answer wrong twice. Open data is the one kind that lets you catch it, in one screen of code.</p>
+  <div class="terminal" role="img" aria-label="Terminal: the command that produces the Hiroshima map, and its output"
+       data-command="python dna.py 132.35 34.2999 132.55 34.4801 hiroshima"
+       data-output="hiroshima.geojson: 252 cells, 13 flagged, Overture 2026-09-23.1
+HDBSCAN 0 clusters, 100% noise
+{&#x27;meta&#x27;: 74.3, &#x27;AllThePlaces&#x27;: 12.8, &#x27;Foursquare&#x27;: 9.2, &#x27;Microsoft&#x27;: 3.6, &#x27;PinMeTo&#x27;: 0.0, &#x27;DAC&#x27;: 0.0}"><span aria-hidden="true">$ </span><span class="cmd"></span>
+<span class="out"></span><span class="cursor" aria-hidden="true"></span></div>
+  <div class="byline">
+    <div>
+      <strong>Marija Ercegovac</strong>
+      <span>Geospatial analyst</span>
+      <span class="mono">FOSS4G Hiroshima 2026, lightning talk, 2 September, room Ran1</span>
+    </div>
+    <div class="links">
+      <a href="https://github.com/m-erts/neighborhood-dna">github.com/m-erts/neighborhood-dna</a><br>
+      <a href="https://talks.osgeo.org/foss4g-2026/talk/ERGRGW/">the talk in the conference schedule</a><br>
+      <a href="https://talks.osgeo.org/foss4g-2026/speaker/9SBVXW/">speaker profile</a>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-label="the task">
+  <h2>Where do we intervene first?</h2>
+  <div class="body">
+    <dl class="steps">
+      <div>
+        <dt>before</dt>
+        <dd>Cross-country research for EU policy institutions, 16 countries. The functional layer meant licensed POI feeds or field surveys.</dd>
+      </div>
+      <div>
+        <dt>the first question of every city</dt>
+        <dd>Where do we start a mixed-use programme? Which blocks are so mono-functional that they die after 19:00?</dd>
+      </div>
+      <div>
+        <dt>this talk</dt>
+        <dd class="now">The same shortlist from a fully open dataset: minutes on a laptop, 50 lines, reproducible by any municipal analyst.</dd>
+      </div>
+    </dl>
+  </div>
+</section>
+
+<section class="slide" data-label="the idea">
+  <h2>Neighbourhood DNA, and what it actually is</h2>
+  <p class="lede">Take one grid cell. Look at every place inside it. Compute the share by function. That vector is the DNA, and three numbers say how mixed the cell is.</p>
+  <div class="body">
+    <div class="idea">
+      <figure style="margin:0">
+        <svg viewBox="0 0 200 180" role="img" aria-label="One hexagonal cell with places inside it">
+          <polygon points="100,8 180,50 180,130 100,172 20,130 20,50" fill="none" stroke="#38BDF8" stroke-width="1.5"/>
+          <circle cx="103" cy="84" r="4.5" fill="#F43F5E" stroke="#111827" stroke-width="1.5"/><circle cx="49" cy="94" r="4.5" fill="#F43F5E" stroke="#111827" stroke-width="1.5"/><circle cx="95" cy="41" r="4.5" fill="#F43F5E" stroke="#111827" stroke-width="1.5"/><circle cx="149" cy="104" r="4.5" fill="#F43F5E" stroke="#111827" stroke-width="1.5"/><circle cx="105" cy="132" r="4.5" fill="#F43F5E" stroke="#111827" stroke-width="1.5"/><circle cx="62" cy="106" r="4.5" fill="#F43F5E" stroke="#111827" stroke-width="1.5"/><circle cx="40" cy="54" r="4.5" fill="#F43F5E" stroke="#111827" stroke-width="1.5"/><circle cx="66" cy="60" r="4.5" fill="#F43F5E" stroke="#111827" stroke-width="1.5"/><circle cx="151" cy="129" r="4.5" fill="#F43F5E" stroke="#111827" stroke-width="1.5"/><circle cx="132" cy="74" r="4.5" fill="#F43F5E" stroke="#111827" stroke-width="1.5"/><circle cx="130" cy="107" r="4.5" fill="#F43F5E" stroke="#111827" stroke-width="1.5"/><circle cx="60" cy="59" r="4.5" fill="#F43F5E" stroke="#111827" stroke-width="1.5"/><circle cx="115" cy="36" r="4.5" fill="#F59E0B" stroke="#111827" stroke-width="1.5"/><circle cx="126" cy="54" r="4.5" fill="#F59E0B" stroke="#111827" stroke-width="1.5"/><circle cx="158" cy="113" r="4.5" fill="#F59E0B" stroke="#111827" stroke-width="1.5"/><circle cx="134" cy="102" r="4.5" fill="#F59E0B" stroke="#111827" stroke-width="1.5"/><circle cx="111" cy="46" r="4.5" fill="#F59E0B" stroke="#111827" stroke-width="1.5"/><circle cx="75" cy="130" r="4.5" fill="#F59E0B" stroke="#111827" stroke-width="1.5"/><circle cx="54" cy="76" r="4.5" fill="#F59E0B" stroke="#111827" stroke-width="1.5"/><circle cx="51" cy="122" r="4.5" fill="#F59E0B" stroke="#111827" stroke-width="1.5"/><circle cx="96" cy="22" r="4.5" fill="#FCD34D" stroke="#111827" stroke-width="1.5"/><circle cx="101" cy="124" r="4.5" fill="#FCD34D" stroke="#111827" stroke-width="1.5"/><circle cx="128" cy="123" r="4.5" fill="#FCD34D" stroke="#111827" stroke-width="1.5"/><circle cx="48" cy="124" r="4.5" fill="#FCD34D" stroke="#111827" stroke-width="1.5"/><circle cx="100" cy="126" r="4.5" fill="#FCD34D" stroke="#111827" stroke-width="1.5"/><circle cx="110" cy="53" r="4.5" fill="#FCD34D" stroke="#111827" stroke-width="1.5"/><circle cx="155" cy="56" r="4.5" fill="#047857" stroke="#111827" stroke-width="1.5"/><circle cx="80" cy="140" r="4.5" fill="#047857" stroke="#111827" stroke-width="1.5"/><circle cx="131" cy="106" r="4.5" fill="#047857" stroke="#111827" stroke-width="1.5"/><circle cx="147" cy="105" r="4.5" fill="#818CF8" stroke="#111827" stroke-width="1.5"/><circle cx="148" cy="107" r="4.5" fill="#818CF8" stroke="#111827" stroke-width="1.5"/><circle cx="49" cy="112" r="4.5" fill="#6EE7B7" stroke="#111827" stroke-width="1.5"/><circle cx="81" cy="84" r="4.5" fill="#B45309" stroke="#111827" stroke-width="1.5"/><circle cx="104" cy="130" r="4.5" fill="#059669" stroke="#111827" stroke-width="1.5"/><circle cx="111" cy="131" r="4.5" fill="#A7F3D0" stroke="#111827" stroke-width="1.5"/><circle cx="129" cy="89" r="4.5" fill="#34D399" stroke="#111827" stroke-width="1.5"/><circle cx="170" cy="122" r="4.5" fill="#10B981" stroke="#111827" stroke-width="1.5"/>
+        </svg>
+        <figcaption>one H3 cell, 428 places</figcaption>
+      </figure>
+      <div>
+        <p class="cap">Kamiyacho, Hiroshima, cell 882e69a2bbfffff: share by function</p>
+        <div class="dna" role="img" aria-label="food and drink 31%, shopping 20%, services and business 15%, civic 8%, transport 5%, education 4%, lifestyle 4%, sport 4%, arts 3%, heritage 3%, health 2%, lodging 1%, geographic 0%"><span style="flex:0.3084;background:#F43F5E;color:#0B0F19" title="food and drink 31%">31%</span><span style="flex:0.2009;background:#F59E0B;color:#0B0F19" title="shopping 20%">20%</span><span style="flex:0.1542;background:#FCD34D;color:#0B0F19" title="services and business 15%">15%</span><span style="flex:0.0374;background:#B45309;color:#FFFFFF" title="lifestyle 4%"></span><span style="flex:0.0210;background:#10B981;color:#0B0F19" title="health 2%"></span><span style="flex:0.0374;background:#6EE7B7;color:#0B0F19" title="education 4%"></span><span style="flex:0.0794;background:#047857;color:#FFFFFF" title="civic 8%">8%</span><span style="flex:0.0304;background:#34D399;color:#0B0F19" title="heritage 3%"></span><span style="flex:0.0304;background:#A7F3D0;color:#0B0F19" title="arts 3%"></span><span style="flex:0.0374;background:#059669;color:#0B0F19" title="sport 4%"></span><span style="flex:0.0514;background:#818CF8;color:#0B0F19" title="transport 5%"></span><span style="flex:0.0070;background:#C7D2FE;color:#0B0F19" title="lodging 1%"></span><span style="flex:0.0047;background:#64748B;color:#FFFFFF" title="geographic 0%"></span></div>
+        <div class="legend"><span><i style="background:#F43F5E"></i>food and drink 31%</span><span><i style="background:#F59E0B"></i>shopping 20%</span><span><i style="background:#FCD34D"></i>services and business 15%</span><span><i style="background:#047857"></i>civic 8%</span><span><i style="background:#818CF8"></i>transport 5%</span><span><i style="background:#6EE7B7"></i>education 4%</span></div>
+      </div>
+      <dl class="metrics">
+        <div><dt>Hill q1</dt><dd>7.76</dd><small>exp(&minus;&Sigma; p ln p): effective functions</small></div>
+        <div><dt>Hill q2</dt><dd>5.72</dd><small>1 / &Sigma; p&sup2;: effective dominant ones</small></div>
+        <div><dt>top share</dt><dd>0.31</dd><small>max p: how mono-functional</small></div>
+      </dl>
+    </div>
+  </div>
+  <p class="takeaway">The same maths ecologists use for species in a habitat, applied to functions in a city block.</p>
+</section>
+
+<section class="slide" data-label="what it is for">
+  <h2>The blocks where one function owns the street</h2>
+  <figure class="figure" data-svg="assets/maps-slide.svg">
+    <img src="assets/maps-slide.svg" alt="Hexagon maps of Hiroshima, Belgrade, Amsterdam and London shaded by top category share. Flagged cells: Hiroshima 13 of 252, Belgrade 10 of 216, Amsterdam 39 of 360, London 15 of 586.">
+  </figure>
+  <p class="takeaway">13 cells in Hiroshima, 10 in Belgrade: short enough to walk. Hexagons compare cities; swap in your own blocks to act on one.</p>
+  <p class="source"><a href="demo.html">Open the interactive map</a> &nbsp; made with: make cities</p>
+</section>
+
+<section class="slide" data-label="trap 1: the metric">
+  <h2>The obvious metric sees nothing</h2>
+  <figure class="figure" data-svg="assets/check-cell-size-slide.svg">
+    <img src="assets/check-cell-size-slide.svg" alt="Two line charts over six density bins. Category richness: the four cities stay within 1 category of each other. Hill q2: the cities separate by up to 1.98.">
+  </figure>
+  <p class="takeaway">Counting categories measures how much data you have. Hill numbers measure the city.</p>
+  <p class="source">made with: python checks.py 2026-09-23.1 &nbsp; table: <a href="https://github.com/m-erts/neighborhood-dna/blob/main/docs/RESULTS.md">docs/RESULTS.md</a>, section 2</p>
+</section>
+
+<section class="slide" data-label="trap 2: the source">
+  <h2>One filter changes the ranking</h2>
+  <figure class="figure" data-svg="assets/check-sources-slide.svg">
+    <img src="assets/check-sources-slide.svg" alt="Share of places from Meta: Belgrade 92.7%, Amsterdam 83.6%, Hiroshima 74.3%, London 60.8%. Median Hill q2 with all sources against Meta only: London moves from 2nd to 1st.">
+  </figure>
+  <p class="takeaway">Overture blends providers. Belgrade is 93% Meta, London 61%. Nobody reads the sources column.</p>
+  <p class="source">made with: python checks.py 2026-09-23.1 &nbsp; table: <a href="https://github.com/m-erts/neighborhood-dna/blob/main/docs/RESULTS.md">docs/RESULTS.md</a>, section 3</p>
+</section>
+
+<section class="slide" data-label="the stack">
+  <h2>What Overture ships that makes this possible</h2>
+  <div class="body">
+    <dl class="rows">
+      <div><dt>GeoParquet on public S3</dt><dd>The bbox filter runs storage-side: no download, no ETL, no account. A city costs 30 to 42 MiB of the 11 GB.</dd></div>
+      <div><dt>taxonomy.hierarchy</dt><dd>A standard hierarchy: 13 branches at level 1 to compare cities, 126 groups at level 2 for detail.</dd></div>
+      <div><dt>bbox struct in every row</dt><dd>Predicate pushdown without touching geometry.</dd></div>
+      <div><dt>sources column</dt><dd>You can see whose places each city is made of, which is the basis of check 2. With a closed feed you take the blend on trust.</dd></div>
+      <div><dt>monthly releases</dt><dd>Each one stays on S3 for 60 days. Archive your extract or nobody can rerun your numbers.</dd></div>
+      <div><dt>open licences per source</dt><dd>CDLA-Permissive 2.0, Apache 2.0 and CC0 in these four cities, recorded place by place.</dd></div>
+    </dl>
+  </div>
+  <p class="source">Overture Maps Foundation, <a href="https://docs.overturemaps.org/guides/places/">docs.overturemaps.org</a>. Release 2026-09-23.1 holds 81 million places.</p>
+</section>
+
+<section class="slide" data-label="the code">
+  <h2>No download. No ETL. One screen.</h2>
+  <div class="body">
+    <div class="code-wrap">
+      <div class="code">
+        <header><span>dna.py &nbsp; 50 lines of code</span><button type="button" data-copy>Copy</button></header>
+        <pre tabindex="0" aria-label="Source of dna.py"><code><span class="l"><span class="ch">#!/usr/bin/env python3</span></span><span class="l"><span class="c1"># /// script</span></span><span class="l"><span class="c1"># requires-python = "&gt;=3.11"</span></span><span class="l"><span class="c1"># dependencies = ["duckdb==1.5.6", "scikit-learn==1.9.1"]</span></span><span class="l"><span class="c1"># ///</span></span><span class="l"><span class="sd">"""Neighborhood DNA from Overture Maps Places. FOSS4G Hiroshima 2026.</span></span><span class="l"></span><span class="l"><span class="sd">    python dna.py WEST SOUTH EAST NORTH NAME [RELEASE | extract.parquet]</span></span><span class="l"><span class="sd">    python dna.py 132.35 34.30 132.55 34.48 hiroshima</span></span><span class="l"></span><span class="l"><span class="sd">Writes NAME.geojson: one H3 cell per feature with its category shares (the</span></span><span class="l"><span class="sd">DNA), Hill numbers, TF-IDF signature and HDBSCAN label. Nothing is downloaded:</span></span><span class="l"><span class="sd">DuckDB reads the parquet on S3 and pushes the bbox filter down to storage.</span></span><span class="l"><span class="sd">"""</span></span><span class="l"><span class="kn">import</span><span class="w"> </span><span class="nn">json</span></span><span class="l"><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span></span><span class="l"></span><span class="l"><span class="kn">import</span><span class="w"> </span><span class="nn">duckdb</span></span><span class="l"><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.cluster</span><span class="w"> </span><span class="kn">import</span> <span class="n">HDBSCAN</span></span><span class="l"></span><span class="l"><span class="n">S3</span> <span class="o">=</span> <span class="s2">"s3://overturemaps-us-west-2/release"</span></span><span class="l"><span class="c1"># H3_RES 8: hexagons of 0.6-0.8 km2, the area drifts with location (CAVEATS 4).</span></span><span class="l"><span class="c1"># LEVEL 1: the 13 top branches of the taxonomy; 2 gives ~125 groups.</span></span><span class="l"><span class="c1"># MIN_POI 10: below that the diversity metrics are sampling noise.</span></span><span class="l"><span class="n">H3_RES</span><span class="p">,</span> <span class="n">LEVEL</span><span class="p">,</span> <span class="n">MIN_POI</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span></span><span class="l"></span><span class="l"><span class="n">west</span><span class="p">,</span> <span class="n">south</span><span class="p">,</span> <span class="n">east</span><span class="p">,</span> <span class="n">north</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="o">*</span><span class="nb">map</span><span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="p">]),</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span></span><span class="l"><span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="o">-</span><span class="mi">180</span> <span class="o">&lt;=</span> <span class="n">west</span> <span class="o">&lt;</span> <span class="n">east</span> <span class="o">&lt;=</span> <span class="mi">180</span> <span class="ow">and</span> <span class="o">-</span><span class="mi">90</span> <span class="o">&lt;=</span> <span class="n">south</span> <span class="o">&lt;</span> <span class="n">north</span> <span class="o">&lt;=</span> <span class="mi">90</span><span class="p">):</span></span><span class="l">    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s2">"bbox order is WEST SOUTH EAST NORTH (lon lat lon lat)"</span><span class="p">)</span></span><span class="l"></span><span class="l"><span class="n">duckdb</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s2">"<span class="q">INSTALL</span> httpfs; <span class="q">LOAD</span> httpfs; <span class="q">INSTALL</span> spatial; <span class="q">LOAD</span> spatial; <span class="q">SET</span> http_retries = 6;"</span></span><span class="l">           <span class="s2">"<span class="q">INSTALL</span> h3 <span class="q">FROM</span> community; <span class="q">LOAD</span> h3; <span class="q">SET</span> s3_region = 'us-west-2';"</span><span class="p">)</span></span><span class="l"><span class="n">source</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">6</span> <span class="k">else</span> <span class="nb">max</span><span class="p">(</span>  <span class="c1"># default: the newest release on S3</span></span><span class="l">    <span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"/"</span><span class="p">)[</span><span class="mi">4</span><span class="p">]</span> <span class="k">for</span> <span class="n">path</span><span class="p">,</span> <span class="ow">in</span> <span class="n">duckdb</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="sa">f</span><span class="s2">"<span class="q">FROM</span> glob('</span><span class="si">{</span><span class="n">S3</span><span class="si">}</span><span class="s2">/*/theme=places/*/*')"</span><span class="p">)</span><span class="o">.</span><span class="n">fetchall</span><span class="p">())</span></span><span class="l"><span class="n">files</span> <span class="o">=</span> <span class="n">source</span> <span class="k">if</span> <span class="n">source</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">".parquet"</span><span class="p">)</span> <span class="k">else</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">S3</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">source</span><span class="si">}</span><span class="s2">/theme=places/type=place/*"</span></span><span class="l"><span class="n">duckdb</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="sa">f</span><span class="s2">"""<span class="q">CREATE TABLE</span> places <span class="q">AS</span></span></span><span class="l"><span class="s2"><span class="q">SELECT</span> h3_latlng_to_cell(bbox.ymin, bbox.xmin, </span><span class="si">{</span><span class="n">H3_RES</span><span class="si">}</span><span class="s2">) <span class="q">AS</span> cell, sources[1].dataset <span class="q">AS</span> provider,</span></span><span class="l"><span class="s2">       taxonomy.hierarchy[least(</span><span class="si">{</span><span class="n">LEVEL</span><span class="si">}</span><span class="s2">, len(taxonomy.hierarchy))] <span class="q">AS</span> category</span></span><span class="l"><span class="s2"><span class="q">FROM</span> read_parquet('</span><span class="si">{</span><span class="n">files</span><span class="si">}</span><span class="s2">') <span class="q">WHERE</span> len(taxonomy.hierarchy) &gt; 0</span></span><span class="l"><span class="s2"> <span class="q">AND</span> bbox.xmin <span class="q">BETWEEN</span> </span><span class="si">{</span><span class="n">west</span><span class="si">}</span><span class="s2"> <span class="q">AND</span> </span><span class="si">{</span><span class="n">east</span><span class="si">}</span><span class="s2"> <span class="q">AND</span> bbox.ymin <span class="q">BETWEEN</span> </span><span class="si">{</span><span class="n">south</span><span class="si">}</span><span class="s2"> <span class="q">AND</span> </span><span class="si">{</span><span class="n">north</span><span class="si">}</span><span class="s2">"""</span><span class="p">)</span></span><span class="l"></span><span class="l"><span class="n">cells</span> <span class="o">=</span> <span class="n">duckdb</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="sa">f</span><span class="s2">"""<span class="q">WITH</span> shares <span class="q">AS</span> (</span></span><span class="l"><span class="s2">    <span class="q">SELECT</span> cell, category, n / sum(n) <span class="q">OVER</span> c <span class="q">AS</span> p, sum(n) <span class="q">OVER</span> c <span class="q">AS</span> poi</span></span><span class="l"><span class="s2">    <span class="q">FROM</span> (<span class="q">SELECT</span> cell, category, count(*)::DOUBLE <span class="q">AS</span> n <span class="q">FROM</span> places <span class="q">GROUP BY</span> <span class="q">ALL</span>)</span></span><span class="l"><span class="s2">    <span class="q">WINDOW</span> c <span class="q">AS</span> (<span class="q">PARTITION BY</span> cell) <span class="q">QUALIFY</span> poi &gt;= </span><span class="si">{</span><span class="n">MIN_POI</span><span class="si">}</span></span><span class="l"><span class="s2">), weighted <span class="q">AS</span> (  -- TF-IDF: share in the cell x smoothed inverse cell frequency</span></span><span class="l"><span class="s2">    <span class="q">SELECT</span> *, p * (1 + ln((1 + count(<span class="q">DISTINCT</span> cell) <span class="q">OVER</span> ()) / (1 + count(*) <span class="q">OVER</span> k))) <span class="q">AS</span> w</span></span><span class="l"><span class="s2">    <span class="q">FROM</span> shares <span class="q">WINDOW</span> k <span class="q">AS</span> (<span class="q">PARTITION BY</span> category))</span></span><span class="l"><span class="s2"><span class="q">SELECT</span> ST_AsGeoJSON(ST_GeomFromText(h3_cell_to_boundary_wkt(cell))) <span class="q">AS</span> geometry,</span></span><span class="l"><span class="s2">       h3_h3_to_string(cell) <span class="q">AS</span> h3, any_value(poi)::INT <span class="q">AS</span> poi, count(*) <span class="q">AS</span> richness,</span></span><span class="l"><span class="s2">       round(exp(-sum(p * ln(p))), 3) <span class="q">AS</span> hill_q1, round(1 / sum(p * p), 3) <span class="q">AS</span> hill_q2,</span></span><span class="l"><span class="s2">       round(max(p), 3) <span class="q">AS</span> top_share, max(p) &gt;= 0.5 <span class="q">AS</span> flagged,</span></span><span class="l"><span class="s2">       first(category <span class="q">ORDER BY</span> p <span class="q">DESC</span>, category) <span class="q">AS</span> dominant,  -- ties: alphabetical</span></span><span class="l"><span class="s2">       map_from_entries(list((category, round(p, 3)) <span class="q">ORDER BY</span> p <span class="q">DESC</span>, category)) <span class="q">AS</span> dna,</span></span><span class="l"><span class="s2">       map_from_entries(list((category, round(w, 3)) <span class="q">ORDER BY</span> w <span class="q">DESC</span>, category)) <span class="q">AS</span> tfidf</span></span><span class="l"><span class="s2"><span class="q">FROM</span> weighted <span class="q">GROUP BY</span> cell <span class="q">ORDER BY</span> h3"""</span><span class="p">)</span></span><span class="l"><span class="n">cells</span> <span class="o">=</span> <span class="p">[</span><span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">cells</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="n">row</span><span class="p">))</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">cells</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()]</span></span><span class="l"><span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">cells</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span></span><span class="l">    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="sa">f</span><span class="s2">"only </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">cells</span><span class="p">)</span><span class="si">}</span><span class="s2"> cells hold </span><span class="si">{</span><span class="n">MIN_POI</span><span class="si">}</span><span class="s2">+ categorised places: widen the bbox"</span><span class="p">)</span></span><span class="l"><span class="n">categories</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">({</span><span class="n">category</span> <span class="k">for</span> <span class="n">cell</span> <span class="ow">in</span> <span class="n">cells</span> <span class="k">for</span> <span class="n">category</span> <span class="ow">in</span> <span class="n">cell</span><span class="p">[</span><span class="s2">"dna"</span><span class="p">]})</span></span><span class="l"><span class="n">labels</span> <span class="o">=</span> <span class="n">HDBSCAN</span><span class="p">(</span><span class="n">min_cluster_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span></span><span class="l">    <span class="p">[[</span><span class="n">cell</span><span class="p">[</span><span class="s2">"tfidf"</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">category</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="k">for</span> <span class="n">category</span> <span class="ow">in</span> <span class="n">categories</span><span class="p">]</span> <span class="k">for</span> <span class="n">cell</span> <span class="ow">in</span> <span class="n">cells</span><span class="p">])</span></span><span class="l"><span class="n">blend</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">duckdb</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s2">"""<span class="q">SELECT</span> provider, round(100 * count(*) / sum(count(*)) <span class="q">OVER</span> (), 1)</span></span><span class="l"><span class="s2">                           <span class="q">FROM</span> places <span class="q">GROUP BY</span> 1 <span class="q">ORDER BY</span> 2 <span class="q">DESC</span>"""</span><span class="p">)</span><span class="o">.</span><span class="n">fetchall</span><span class="p">())</span></span><span class="l"><span class="n">meta</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">source</span><span class="p">,</span> <span class="n">bbox</span><span class="o">=</span><span class="p">[</span><span class="n">west</span><span class="p">,</span> <span class="n">south</span><span class="p">,</span> <span class="n">east</span><span class="p">,</span> <span class="n">north</span><span class="p">],</span> <span class="n">h3_res</span><span class="o">=</span><span class="n">H3_RES</span><span class="p">,</span></span><span class="l">            <span class="n">taxonomy_level</span><span class="o">=</span><span class="n">LEVEL</span><span class="p">,</span> <span class="n">min_poi</span><span class="o">=</span><span class="n">MIN_POI</span><span class="p">,</span> <span class="n">providers_pct</span><span class="o">=</span><span class="n">blend</span><span class="p">)</span></span><span class="l"><span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="nb">dict</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">"Feature"</span><span class="p">,</span> <span class="n">geometry</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">cell</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">"geometry"</span><span class="p">)),</span></span><span class="l">                 <span class="n">properties</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="n">cluster</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">label</span><span class="p">)))</span> <span class="k">for</span> <span class="n">cell</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">cells</span><span class="p">,</span> <span class="n">labels</span><span class="p">)]</span></span><span class="l"><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">.geojson"</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">out</span><span class="p">:</span></span><span class="l">    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">"FeatureCollection"</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="n">meta</span><span class="p">,</span> <span class="n">features</span><span class="o">=</span><span class="n">features</span><span class="p">),</span> <span class="n">out</span><span class="p">)</span></span><span class="l"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">.geojson: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">cells</span><span class="p">)</span><span class="si">}</span><span class="s2"> cells, </span><span class="si">{</span><span class="nb">sum</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="s1">'flagged'</span><span class="p">]</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">cells</span><span class="p">)</span><span class="si">}</span><span class="s2"> flagged, Overture "</span></span><span class="l">      <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">source</span><span class="si">}</span><span class="se">\n</span><span class="s2">HDBSCAN </span><span class="si">{</span><span class="n">labels</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2"> clusters, </span><span class="si">{</span><span class="p">(</span><span class="n">labels</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.0%</span><span class="si">}</span><span class="s2"> noise</span><span class="se">\n</span><span class="si">{</span><span class="n">blend</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span></span></code></pre>
+      </div>
+      <ol class="outline" aria-label="Steps of the pipeline">
+        <li><button type="button" data-lines="21-25" aria-pressed="false">Parameters<small>lines 21 to 25</small></button></li>
+        <li><button type="button" data-lines="27-29" aria-pressed="false">Read the bbox<small>lines 27 to 29</small></button></li>
+        <li><button type="button" data-lines="31-35" aria-pressed="false">Attach to S3, pick a release<small>lines 31 to 35</small></button></li>
+        <li><button type="button" data-lines="36-40" aria-pressed="false">Scan the places in the bbox<small>lines 36 to 40</small></button></li>
+        <li><button type="button" data-lines="42-56" aria-pressed="false">DNA, TF-IDF, Hill numbers: SQL<small>lines 42 to 56</small></button></li>
+        <li><button type="button" data-lines="57-62" aria-pressed="false">HDBSCAN on the signatures<small>lines 57 to 62</small></button></li>
+        <li><button type="button" data-lines="63-64" aria-pressed="false">Provider blend<small>lines 63 to 64</small></button></li>
+        <li><button type="button" data-lines="65-72" aria-pressed="false">Write the GeoJSON<small>lines 65 to 72</small></button></li>
+      </ol>
+    </div>
+  </div>
+  <p class="source">DuckDB reads Overture straight off S3 and the bbox filter runs at the storage side. CI fails if the script grows past 50 lines.</p>
+</section>
+
+<section class="slide" data-label="who uses this">
+  <h2>Planners were just the example</h2>
+  <div class="body">
+    <dl class="rows plain tight">
+      <div><dt>Urban planning</dt><dd>Where to start a mixed-use programme</dd></div>
+      <div><dt>Transport</dt><dd>Where car dependency is built into the block</dd></div>
+      <div><dt>Retail siting</dt><dd>Which function is missing from a busy cell</dd></div>
+      <div><dt>Public health</dt><dd>Food deserts: homes with no grocery in reach</dd></div>
+      <div><dt>Tourism policy</dt><dd>Where lodging pushes out everyday functions</dd></div>
+      <div><dt>Humanitarian work</dt><dd>Cities that have no other source at all</dd></div>
+      <div><dt>Data quality</dt><dd>The check that caught trap 2 measures bias in the open data itself</dd></div>
+    </dl>
+  </div>
+  <p class="takeaway">One number, top share, answers a different question in every one of these rooms.</p>
+</section>
+
+<section class="slide" data-label="take it">
+  <h2>Two checks before you trust a POI metric</h2>
+  <div class="body">
+    <div class="checks">
+      <div><b><span>1</span>Control for cell size</b><p>Or you measure your data, not your city.</p></div>
+      <div><b><span>2</span>Check the sources column</b><p>Or you compare providers, not places.</p></div>
+    </div>
+    <div class="take">
+      <img src="assets/qr.svg" alt="QR code leading to github.com/m-erts/neighborhood-dna">
+      <div>
+        <a class="url" href="https://github.com/m-erts/neighborhood-dna">github.com/m-erts/neighborhood-dna</a>
+        <p>Code, data and the full list of caveats. Both checks are possible because the data is open.</p>
+        <p class="mono">Code MIT, slides CC BY 4.0. The categories field left the Overture schema in release 2026-09-23.0: write against taxonomy.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-label="after Hiroshima">
+  <h2>What I got wrong, found while packaging</h2>
+  <div class="body">
+    <dl class="rows tight">
+      <div><dt>the pinned release</dt><dd>On stage: a pinned release reproduces in December. It did not survive September, because Overture keeps a release for 60 days. <small>dna.py now takes the newest release, or your own archived extract.</small></dd></div>
+      <div><dt>equal-area cells</dt><dd>H3 cells are not equal-area. At resolution 8 they average 0.58 km&sup2; in Hiroshima and 0.78 km&sup2; in Belgrade.</dd></div>
+      <div><dt>the shortlist</dt><dd>It moves between releases. Hiroshima: 16 flagged cells in 2026-08-19.0, 13 in 2026-09-23.1, 13 in both.</dd></div>
+      <div><dt>the dominant function</dt><dd>37 Hiroshima cells have two functions tied for first place and arg_max picked one at random. <small>Ties now break alphabetically, so two runs give the same file.</small></dd></div>
+      <div><dt>the typology</dt><dd>The abstract promised clusters. HDBSCAN returns 0 clusters and 100% noise in all four cities: function mix is a continuum.</dd></div>
+    </dl>
+  </div>
+  <p class="source">Numbers on these slides are recomputed on release 2026-09-23.1. The stage version used 2026-07-22.0: <a href="slides-as-delivered.pdf">slides as delivered (PDF)</a>.</p>
+</section>
+
+</main>
+
+<nav class="status" aria-label="Slide navigation">
+  <a href="https://github.com/m-erts/neighborhood-dna">neighborhood-dna</a>
+  <span data-status aria-live="polite"></span>
+  <span class="grow"></span>
+  <a class="wide" href="demo.html">interactive map</a>
+  <span class="wide">FOSS4G Hiroshima 2026</span>
+  <button type="button" data-prev aria-label="Previous slide">&larr;</button>
+  <button type="button" data-next aria-label="Next slide">&rarr;</button>
+  <span class="count" data-count></span>
+</nav>
+<div class="tip" role="tooltip" hidden></div>
+<script src="js/slides.js"></script>
+</body>
+</html>

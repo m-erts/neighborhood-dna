@@ -1,0 +1,213 @@
+<!doctype html>
+<!-- Built by docs/build.py from docs/slides.template.html. Edit the template, not index.html. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Neighborhood DNA: 50 Lines of Python</title>
+<meta name="description" content="Slides of the FOSS4G Hiroshima 2026 lightning talk. The functional profile of any neighbourhood from Overture Maps Places, in 50 lines of Python.">
+<meta name="author" content="Marija Ercegovac">
+<meta property="og:title" content="50 Lines of Python: Neighborhood DNA from Overture Maps Places">
+<meta property="og:description" content="FOSS4G Hiroshima 2026 lightning talk. DuckDB reads Overture Places on S3; two checks tell you when the numbers lie.">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://m-erts.github.io/neighborhood-dna/assets/banner.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/slides.css">
+</head>
+<body>
+<main class="deck">
+
+<section class="slide title" data-label="title">
+  <h1>50 Lines of Python</h1>
+  <p class="sub">Neighborhood DNA from Overture Maps Places</p>
+  <p class="premise">Any POI dataset will answer wrong twice. Open data is the one kind that lets you catch it, in one screen of code.</p>
+  <div class="terminal" role="img" aria-label="Terminal: the command that produces the Hiroshima map, and its output"
+       data-command="python dna.py ${hiroshima_bbox} hiroshima"
+       data-output="${terminal_output}"><span aria-hidden="true">$$ </span><span class="cmd"></span>
+<span class="out"></span><span class="cursor" aria-hidden="true"></span></div>
+  <div class="byline">
+    <div>
+      <strong>Marija Ercegovac</strong>
+      <span>Geospatial analyst</span>
+      <span class="mono">FOSS4G Hiroshima 2026, lightning talk, 2 September, room Ran1</span>
+    </div>
+    <div class="links">
+      <a href="https://github.com/m-erts/neighborhood-dna">github.com/m-erts/neighborhood-dna</a><br>
+      <a href="https://talks.osgeo.org/foss4g-2026/talk/ERGRGW/">the talk in the conference schedule</a><br>
+      <a href="https://talks.osgeo.org/foss4g-2026/speaker/9SBVXW/">speaker profile</a>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-label="the task">
+  <h2>Where do we intervene first?</h2>
+  <div class="body">
+    <dl class="steps">
+      <div>
+        <dt>before</dt>
+        <dd>Cross-country research for EU policy institutions, 16 countries. The functional layer meant licensed POI feeds or field surveys.</dd>
+      </div>
+      <div>
+        <dt>the first question of every city</dt>
+        <dd>Where do we start a mixed-use programme? Which blocks are so mono-functional that they die after 19:00?</dd>
+      </div>
+      <div>
+        <dt>this talk</dt>
+        <dd class="now">The same shortlist from a fully open dataset: minutes on a laptop, 50 lines, reproducible by any municipal analyst.</dd>
+      </div>
+    </dl>
+  </div>
+</section>
+
+<section class="slide" data-label="the idea">
+  <h2>Neighbourhood DNA, and what it actually is</h2>
+  <p class="lede">Take one grid cell. Look at every place inside it. Compute the share by function. That vector is the DNA, and three numbers say how mixed the cell is.</p>
+  <div class="body">
+    <div class="idea">
+      <figure style="margin:0">
+        <svg viewBox="0 0 200 180" role="img" aria-label="One hexagonal cell with places inside it">
+          <polygon points="100,8 180,50 180,130 100,172 20,130 20,50" fill="none" stroke="#38BDF8" stroke-width="1.5"/>
+          ${idea_dots}
+        </svg>
+        <figcaption>one H3 cell, ${idea_places} places</figcaption>
+      </figure>
+      <div>
+        <p class="cap">${idea_name}, cell ${idea_h3}: share by function</p>
+        <div class="dna" role="img" aria-label="${idea_aria}">${idea_bar}</div>
+        <div class="legend">${idea_legend}</div>
+      </div>
+      <dl class="metrics">
+        <div><dt>Hill q1</dt><dd>${idea_q1}</dd><small>exp(&minus;&Sigma; p ln p): effective functions</small></div>
+        <div><dt>Hill q2</dt><dd>${idea_q2}</dd><small>1 / &Sigma; p&sup2;: effective dominant ones</small></div>
+        <div><dt>top share</dt><dd>${idea_top}</dd><small>max p: how mono-functional</small></div>
+      </dl>
+    </div>
+  </div>
+  <p class="takeaway">The same maths ecologists use for species in a habitat, applied to functions in a city block.</p>
+</section>
+
+<section class="slide" data-label="what it is for">
+  <h2>The blocks where one function owns the street</h2>
+  <figure class="figure" data-svg="assets/maps-slide.svg">
+    <img src="assets/maps-slide.svg" alt="Hexagon maps of Hiroshima, Belgrade, Amsterdam and London shaded by top category share. Flagged cells: Hiroshima ${hiroshima_flagged} of ${hiroshima_cells}, Belgrade ${belgrade_flagged} of ${belgrade_cells}, Amsterdam ${amsterdam_flagged} of ${amsterdam_cells}, London ${london_flagged} of ${london_cells}.">
+  </figure>
+  <p class="takeaway">${hiroshima_flagged} cells in Hiroshima, ${belgrade_flagged} in Belgrade: short enough to walk. Hexagons compare cities; swap in your own blocks to act on one.</p>
+  <p class="source"><a href="demo.html">Open the interactive map</a> &nbsp; made with: make cities</p>
+</section>
+
+<section class="slide" data-label="trap 1: the metric">
+  <h2>The obvious metric sees nothing</h2>
+  <figure class="figure" data-svg="assets/check-cell-size-slide.svg">
+    <img src="assets/check-cell-size-slide.svg" alt="Two line charts over six density bins. Category richness: the four cities stay within ${gap_richness} category of each other. Hill q2: the cities separate by up to ${gap_hill}.">
+  </figure>
+  <p class="takeaway">Counting categories measures how much data you have. Hill numbers measure the city.</p>
+  <p class="source">made with: python checks.py ${release} &nbsp; table: <a href="https://github.com/m-erts/neighborhood-dna/blob/main/docs/RESULTS.md">docs/RESULTS.md</a>, section 2</p>
+</section>
+
+<section class="slide" data-label="trap 2: the source">
+  <h2>One filter changes the ranking</h2>
+  <figure class="figure" data-svg="assets/check-sources-slide.svg">
+    <img src="assets/check-sources-slide.svg" alt="Share of places from Meta: Belgrade ${belgrade_meta}%, Amsterdam ${amsterdam_meta}%, Hiroshima ${hiroshima_meta}%, London ${london_meta}%. Median Hill q2 with all sources against Meta only: London moves from ${london_rank_all} to ${london_rank_meta}.">
+  </figure>
+  <p class="takeaway">Overture blends providers. Belgrade is ${belgrade_meta_round}% Meta, London ${london_meta_round}%. Nobody reads the sources column.</p>
+  <p class="source">made with: python checks.py ${release} &nbsp; table: <a href="https://github.com/m-erts/neighborhood-dna/blob/main/docs/RESULTS.md">docs/RESULTS.md</a>, section 3</p>
+</section>
+
+<section class="slide" data-label="the stack">
+  <h2>What Overture ships that makes this possible</h2>
+  <div class="body">
+    <dl class="rows">
+      <div><dt>GeoParquet on public S3</dt><dd>The bbox filter runs storage-side: no download, no ETL, no account. A city costs ${mib_low} to ${mib_high} MiB of the ${release_gb} GB.</dd></div>
+      <div><dt>taxonomy.hierarchy</dt><dd>A standard hierarchy: ${level_1} branches at level 1 to compare cities, ${level_2} groups at level 2 for detail.</dd></div>
+      <div><dt>bbox struct in every row</dt><dd>Predicate pushdown without touching geometry.</dd></div>
+      <div><dt>sources column</dt><dd>You can see whose places each city is made of, which is the basis of check 2. With a closed feed you take the blend on trust.</dd></div>
+      <div><dt>monthly releases</dt><dd>Each one stays on S3 for 60 days. Archive your extract or nobody can rerun your numbers.</dd></div>
+      <div><dt>open licences per source</dt><dd>CDLA-Permissive 2.0, Apache 2.0 and CC0 in these four cities, recorded place by place.</dd></div>
+    </dl>
+  </div>
+  <p class="source">Overture Maps Foundation, <a href="https://docs.overturemaps.org/guides/places/">docs.overturemaps.org</a>. Release ${release} holds ${places_millions} million places.</p>
+</section>
+
+<section class="slide" data-label="the code">
+  <h2>No download. No ETL. One screen.</h2>
+  <div class="body">
+    <div class="code-wrap">
+      <div class="code">
+        <header><span>dna.py &nbsp; ${code_lines} lines of code</span><button type="button" data-copy>Copy</button></header>
+        <pre tabindex="0" aria-label="Source of dna.py"><code>${code_html}</code></pre>
+      </div>
+      <ol class="outline" aria-label="Steps of the pipeline">
+        ${outline}
+      </ol>
+    </div>
+  </div>
+  <p class="source">DuckDB reads Overture straight off S3 and the bbox filter runs at the storage side. CI fails if the script grows past 50 lines.</p>
+</section>
+
+<section class="slide" data-label="who uses this">
+  <h2>Planners were just the example</h2>
+  <div class="body">
+    <dl class="rows plain tight">
+      <div><dt>Urban planning</dt><dd>Where to start a mixed-use programme</dd></div>
+      <div><dt>Transport</dt><dd>Where car dependency is built into the block</dd></div>
+      <div><dt>Retail siting</dt><dd>Which function is missing from a busy cell</dd></div>
+      <div><dt>Public health</dt><dd>Food deserts: homes with no grocery in reach</dd></div>
+      <div><dt>Tourism policy</dt><dd>Where lodging pushes out everyday functions</dd></div>
+      <div><dt>Humanitarian work</dt><dd>Cities that have no other source at all</dd></div>
+      <div><dt>Data quality</dt><dd>The check that caught trap 2 measures bias in the open data itself</dd></div>
+    </dl>
+  </div>
+  <p class="takeaway">One number, top share, answers a different question in every one of these rooms.</p>
+</section>
+
+<section class="slide" data-label="take it">
+  <h2>Two checks before you trust a POI metric</h2>
+  <div class="body">
+    <div class="checks">
+      <div><b><span>1</span>Control for cell size</b><p>Or you measure your data, not your city.</p></div>
+      <div><b><span>2</span>Check the sources column</b><p>Or you compare providers, not places.</p></div>
+    </div>
+    <div class="take">
+      <img src="assets/qr.svg" alt="QR code leading to github.com/m-erts/neighborhood-dna">
+      <div>
+        <a class="url" href="https://github.com/m-erts/neighborhood-dna">github.com/m-erts/neighborhood-dna</a>
+        <p>Code, data and the full list of caveats. Both checks are possible because the data is open.</p>
+        <p class="mono">Code MIT, slides CC BY 4.0. The categories field left the Overture schema in release 2026-09-23.0: write against taxonomy.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-label="after Hiroshima">
+  <h2>What I got wrong, found while packaging</h2>
+  <div class="body">
+    <dl class="rows tight">
+      <div><dt>the pinned release</dt><dd>On stage: a pinned release reproduces in December. It did not survive September, because Overture keeps a release for 60 days. <small>dna.py now takes the newest release, or your own archived extract.</small></dd></div>
+      <div><dt>equal-area cells</dt><dd>H3 cells are not equal-area. At resolution 8 they average ${area_low} km&sup2; in ${area_low_city} and ${area_high} km&sup2; in ${area_high_city}.</dd></div>
+      <div><dt>the shortlist</dt><dd>It moves between releases. Hiroshima: ${drift_old} flagged cells in ${previous}, ${drift_new} in ${release}, ${drift_both} in both.</dd></div>
+      <div><dt>the dominant function</dt><dd>${ties} Hiroshima cells have two functions tied for first place and arg_max picked one at random. <small>Ties now break alphabetically, so two runs give the same file.</small></dd></div>
+      <div><dt>the typology</dt><dd>The abstract promised clusters. HDBSCAN returns ${hdbscan} in all four cities: function mix is a continuum.</dd></div>
+    </dl>
+  </div>
+  <p class="source">Numbers on these slides are recomputed on release ${release}. The stage version used 2026-07-22.0: <a href="slides-as-delivered.pdf">slides as delivered (PDF)</a>.</p>
+</section>
+
+</main>
+
+<nav class="status" aria-label="Slide navigation">
+  <a href="https://github.com/m-erts/neighborhood-dna">neighborhood-dna</a>
+  <span data-status aria-live="polite"></span>
+  <span class="grow"></span>
+  <a class="wide" href="demo.html">interactive map</a>
+  <span class="wide">FOSS4G Hiroshima 2026</span>
+  <button type="button" data-prev aria-label="Previous slide">&larr;</button>
+  <button type="button" data-next aria-label="Next slide">&rarr;</button>
+  <span class="count" data-count></span>
+</nav>
+<div class="tip" role="tooltip" hidden></div>
+<script src="js/slides.js"></script>
+</body>
+</html>
